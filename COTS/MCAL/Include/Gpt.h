@@ -22,13 +22,16 @@
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
 #define GPTMCFG_TIMER_A_ONLY                   (0x04U) /*Driver didn't support concatenated mode*/
+
+
 #define GPTMCFG_TAAMS_PWM_ENABLE               (1U<<3)
 #define GPTMCFG_TAMR_ONESHOT                    0x01U
 #define GPTMCFG_TAMR_PERIODIC                   0x02U
 #define GPTMCFG_TAPWMIE_ENABLE                  (1U<<9)
 #define GPTMCFG_TACDIR_COUNTUP                  (1U<<4) /*1: Count Up*/
 #define GPTMCTL_TAEN                            (1U)
-#define GPTMIMR_TATOIM                            (1U)
+#define GPTMCTL_TBEN                         (0x100U)
+#define GPTMIMR_TATOIM                          (1U)
 
 
 /**********************************************************************************************************************

@@ -22,7 +22,7 @@ Dialog DLL:      TCM.DLL V1.56.1.0
  
 <h2>Project:</h2>
 D:\MF\Personal\Intellectual\Embedded_SW\EgFWD\Advanced Embedded Systems\Exercise\Project1_Blinking_LED_control\Project1_Blinking_LED_control.uvprojx
-Project File Date:  07/30/2022
+Project File Date:  08/03/2022
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.18', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
@@ -230,133 +230,153 @@ COTS/MCAL/Gpt/Gpt.c(16): warning: In file included from...
 COTS/MCAL/Gpt/Gpt.c(46): warning: // comments are not allowed in this language [-Wcomment]
 //GptLoadSet
 ^
-COTS/MCAL/Gpt/Gpt.c(188): warning: unused parameter 'TimerVale' [-Wunused-parameter]
+COTS/MCAL/Gpt/Gpt.c(141): warning: no previous extern declaration for non-static variable 'tempRegVal' [-Wmissing-variable-declarations]
+volatile uint32  tempRegVal  = 0xFFFFFFFF;
+                 ^
+COTS/MCAL/Gpt/Gpt.c(141): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+volatile uint32  tempRegVal  = 0xFFFFFFFF;
+         ^
+COTS/MCAL/Gpt/Gpt.c(142): warning: incompatible integer to pointer conversion initializing 'volatile uint32 *' (aka 'volatile unsigned long *') with an expression of type 'unsigned int' [-Wint-conversion]
+volatile uint32* tempRegAddr1 = 0xFFFFFFFF;
+                 ^              ~~~~~~~~~~
+COTS/MCAL/Gpt/Gpt.c(142): warning: no previous extern declaration for non-static variable 'tempRegAddr1' [-Wmissing-variable-declarations]
+COTS/MCAL/Gpt/Gpt.c(142): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+volatile uint32* tempRegAddr1 = 0xFFFFFFFF;
+         ^
+COTS/MCAL/Gpt/Gpt.c(143): warning: incompatible integer to pointer conversion initializing 'volatile uint32 *' (aka 'volatile unsigned long *') with an expression of type 'unsigned int' [-Wint-conversion]
+volatile uint32* tempRegAddr2 = 0xFFFFFFFF;
+                 ^              ~~~~~~~~~~
+COTS/MCAL/Gpt/Gpt.c(143): warning: no previous extern declaration for non-static variable 'tempRegAddr2' [-Wmissing-variable-declarations]
+COTS/MCAL/Gpt/Gpt.c(143): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+volatile uint32* tempRegAddr2 = 0xFFFFFFFF;
+         ^
+COTS/MCAL/Gpt/Gpt.c(216): warning: unused parameter 'TimerVale' [-Wunused-parameter]
 void Gpt_StartTimer(Gpt_ChannelType channelId, Gpt_ValueType TimerVale)
                                                              ^
-COTS/MCAL/Gpt/Gpt.c(211): warning: extra ';' outside of a function [-Wextra-semi]
+COTS/MCAL/Gpt/Gpt.c(239): warning: extra ';' outside of a function [-Wextra-semi]
 }; 
  ^~
-COTS/MCAL/Gpt/Gpt.c(231): warning: no previous prototype for function 'TIMER0A_Handler' [-Wmissing-prototypes]
+COTS/MCAL/Gpt/Gpt.c(292): warning: no previous prototype for function 'TIMER0A_Handler' [-Wmissing-prototypes]
 void TIMER0A_Handler(void)              {if (gptCallbackNotifications[0 ] != NULL_PTR)  gptCallbackNotifications[0 ];}
      ^
-COTS/MCAL/Gpt/Gpt.c(231): note: declare 'static' if the function is not intended to be used outside of this translation unit
+COTS/MCAL/Gpt/Gpt.c(292): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void TIMER0A_Handler(void)              {if (gptCallbackNotifications[0 ] != NULL_PTR)  gptCallbackNotifications[0 ];}
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(231): warning: expression result unused [-Wunused-value]
+COTS/MCAL/Gpt/Gpt.c(292): warning: expression result unused [-Wunused-value]
 void TIMER0A_Handler(void)              {if (gptCallbackNotifications[0 ] != NULL_PTR)  gptCallbackNotifications[0 ];}
                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(232): warning: no previous prototype for function 'TIMER1A_Handler' [-Wmissing-prototypes]
+COTS/MCAL/Gpt/Gpt.c(293): warning: no previous prototype for function 'TIMER1A_Handler' [-Wmissing-prototypes]
 void TIMER1A_Handler(void)              {if (gptCallbackNotifications[1 ] != NULL_PTR)  gptCallbackNotifications[1 ];}
      ^
-COTS/MCAL/Gpt/Gpt.c(232): note: declare 'static' if the function is not intended to be used outside of this translation unit
+COTS/MCAL/Gpt/Gpt.c(293): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void TIMER1A_Handler(void)              {if (gptCallbackNotifications[1 ] != NULL_PTR)  gptCallbackNotifications[1 ];}
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(232): warning: expression result unused [-Wunused-value]
+COTS/MCAL/Gpt/Gpt.c(293): warning: expression result unused [-Wunused-value]
 void TIMER1A_Handler(void)              {if (gptCallbackNotifications[1 ] != NULL_PTR)  gptCallbackNotifications[1 ];}
                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(233): warning: no previous prototype for function 'TIMER2A_Handler' [-Wmissing-prototypes]
+COTS/MCAL/Gpt/Gpt.c(294): warning: no previous prototype for function 'TIMER2A_Handler' [-Wmissing-prototypes]
 void TIMER2A_Handler(void)              {if (gptCallbackNotifications[2 ] != NULL_PTR)  gptCallbackNotifications[2 ];}
      ^
-COTS/MCAL/Gpt/Gpt.c(233): note: declare 'static' if the function is not intended to be used outside of this translation unit
+COTS/MCAL/Gpt/Gpt.c(294): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void TIMER2A_Handler(void)              {if (gptCallbackNotifications[2 ] != NULL_PTR)  gptCallbackNotifications[2 ];}
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(233): warning: expression result unused [-Wunused-value]
+COTS/MCAL/Gpt/Gpt.c(294): warning: expression result unused [-Wunused-value]
 void TIMER2A_Handler(void)              {if (gptCallbackNotifications[2 ] != NULL_PTR)  gptCallbackNotifications[2 ];}
                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(234): warning: no previous prototype for function 'TIMER3A_Handler' [-Wmissing-prototypes]
+COTS/MCAL/Gpt/Gpt.c(295): warning: no previous prototype for function 'TIMER3A_Handler' [-Wmissing-prototypes]
 void TIMER3A_Handler(void)              {if (gptCallbackNotifications[3 ] != NULL_PTR)  gptCallbackNotifications[3 ];}
      ^
-COTS/MCAL/Gpt/Gpt.c(234): note: declare 'static' if the function is not intended to be used outside of this translation unit
+COTS/MCAL/Gpt/Gpt.c(295): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void TIMER3A_Handler(void)              {if (gptCallbackNotifications[3 ] != NULL_PTR)  gptCallbackNotifications[3 ];}
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(234): warning: expression result unused [-Wunused-value]
+COTS/MCAL/Gpt/Gpt.c(295): warning: expression result unused [-Wunused-value]
 void TIMER3A_Handler(void)              {if (gptCallbackNotifications[3 ] != NULL_PTR)  gptCallbackNotifications[3 ];}
                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(235): warning: no previous prototype for function 'TIMER4A_Handler' [-Wmissing-prototypes]
+COTS/MCAL/Gpt/Gpt.c(296): warning: no previous prototype for function 'TIMER4A_Handler' [-Wmissing-prototypes]
 void TIMER4A_Handler(void)              {if (gptCallbackNotifications[4 ] != NULL_PTR)  gptCallbackNotifications[4 ];}
      ^
-COTS/MCAL/Gpt/Gpt.c(235): note: declare 'static' if the function is not intended to be used outside of this translation unit
+COTS/MCAL/Gpt/Gpt.c(296): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void TIMER4A_Handler(void)              {if (gptCallbackNotifications[4 ] != NULL_PTR)  gptCallbackNotifications[4 ];}
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(235): warning: expression result unused [-Wunused-value]
+COTS/MCAL/Gpt/Gpt.c(296): warning: expression result unused [-Wunused-value]
 void TIMER4A_Handler(void)              {if (gptCallbackNotifications[4 ] != NULL_PTR)  gptCallbackNotifications[4 ];}
                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(236): warning: no previous prototype for function 'TIMER5A_Handler' [-Wmissing-prototypes]
+COTS/MCAL/Gpt/Gpt.c(297): warning: no previous prototype for function 'TIMER5A_Handler' [-Wmissing-prototypes]
 void TIMER5A_Handler(void)              {if (gptCallbackNotifications[5 ] != NULL_PTR)  gptCallbackNotifications[5 ];} 
      ^
-COTS/MCAL/Gpt/Gpt.c(236): note: declare 'static' if the function is not intended to be used outside of this translation unit
+COTS/MCAL/Gpt/Gpt.c(297): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void TIMER5A_Handler(void)              {if (gptCallbackNotifications[5 ] != NULL_PTR)  gptCallbackNotifications[5 ];} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(236): warning: expression result unused [-Wunused-value]
+COTS/MCAL/Gpt/Gpt.c(297): warning: expression result unused [-Wunused-value]
 void TIMER5A_Handler(void)              {if (gptCallbackNotifications[5 ] != NULL_PTR)  gptCallbackNotifications[5 ];} 
                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(237): warning: no previous prototype for function 'WTIMER0A_Handler' [-Wmissing-prototypes]
+COTS/MCAL/Gpt/Gpt.c(298): warning: no previous prototype for function 'WTIMER0A_Handler' [-Wmissing-prototypes]
 void WTIMER0A_Handler(void)         {if (gptCallbackNotifications[6 ] != NULL_PTR)      gptCallbackNotifications[6 ];} 
      ^
-COTS/MCAL/Gpt/Gpt.c(237): note: declare 'static' if the function is not intended to be used outside of this translation unit
+COTS/MCAL/Gpt/Gpt.c(298): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void WTIMER0A_Handler(void)         {if (gptCallbackNotifications[6 ] != NULL_PTR)      gptCallbackNotifications[6 ];} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(237): warning: expression result unused [-Wunused-value]
+COTS/MCAL/Gpt/Gpt.c(298): warning: expression result unused [-Wunused-value]
 void WTIMER0A_Handler(void)         {if (gptCallbackNotifications[6 ] != NULL_PTR)      gptCallbackNotifications[6 ];} 
                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(238): warning: no previous prototype for function 'WTIMER1A_Handler' [-Wmissing-prototypes]
+COTS/MCAL/Gpt/Gpt.c(299): warning: no previous prototype for function 'WTIMER1A_Handler' [-Wmissing-prototypes]
 void WTIMER1A_Handler(void)         {if (gptCallbackNotifications[7 ] != NULL_PTR)      gptCallbackNotifications[7 ];} 
      ^
-COTS/MCAL/Gpt/Gpt.c(238): note: declare 'static' if the function is not intended to be used outside of this translation unit
+COTS/MCAL/Gpt/Gpt.c(299): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void WTIMER1A_Handler(void)         {if (gptCallbackNotifications[7 ] != NULL_PTR)      gptCallbackNotifications[7 ];} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(238): warning: expression result unused [-Wunused-value]
+COTS/MCAL/Gpt/Gpt.c(299): warning: expression result unused [-Wunused-value]
 void WTIMER1A_Handler(void)         {if (gptCallbackNotifications[7 ] != NULL_PTR)      gptCallbackNotifications[7 ];} 
                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(239): warning: no previous prototype for function 'WTIMER2A_Handler' [-Wmissing-prototypes]
+COTS/MCAL/Gpt/Gpt.c(300): warning: no previous prototype for function 'WTIMER2A_Handler' [-Wmissing-prototypes]
 void WTIMER2A_Handler(void)         {if (gptCallbackNotifications[8 ] != NULL_PTR)      gptCallbackNotifications[8 ];} 
      ^
-COTS/MCAL/Gpt/Gpt.c(239): note: declare 'static' if the function is not intended to be used outside of this translation unit
+COTS/MCAL/Gpt/Gpt.c(300): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void WTIMER2A_Handler(void)         {if (gptCallbackNotifications[8 ] != NULL_PTR)      gptCallbackNotifications[8 ];} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(239): warning: expression result unused [-Wunused-value]
+COTS/MCAL/Gpt/Gpt.c(300): warning: expression result unused [-Wunused-value]
 void WTIMER2A_Handler(void)         {if (gptCallbackNotifications[8 ] != NULL_PTR)      gptCallbackNotifications[8 ];} 
                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(240): warning: no previous prototype for function 'WTIMER3A_Handler' [-Wmissing-prototypes]
+COTS/MCAL/Gpt/Gpt.c(301): warning: no previous prototype for function 'WTIMER3A_Handler' [-Wmissing-prototypes]
 void WTIMER3A_Handler(void)         {if (gptCallbackNotifications[9 ] != NULL_PTR)      gptCallbackNotifications[9 ];} 
      ^
-COTS/MCAL/Gpt/Gpt.c(240): note: declare 'static' if the function is not intended to be used outside of this translation unit
+COTS/MCAL/Gpt/Gpt.c(301): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void WTIMER3A_Handler(void)         {if (gptCallbackNotifications[9 ] != NULL_PTR)      gptCallbackNotifications[9 ];} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(240): warning: expression result unused [-Wunused-value]
+COTS/MCAL/Gpt/Gpt.c(301): warning: expression result unused [-Wunused-value]
 void WTIMER3A_Handler(void)         {if (gptCallbackNotifications[9 ] != NULL_PTR)      gptCallbackNotifications[9 ];} 
                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(241): warning: no previous prototype for function 'WTIMER4A_Handler' [-Wmissing-prototypes]
+COTS/MCAL/Gpt/Gpt.c(302): warning: no previous prototype for function 'WTIMER4A_Handler' [-Wmissing-prototypes]
 void WTIMER4A_Handler(void)         {if (gptCallbackNotifications[10] != NULL_PTR)      gptCallbackNotifications[10];} 
      ^
-COTS/MCAL/Gpt/Gpt.c(241): note: declare 'static' if the function is not intended to be used outside of this translation unit
+COTS/MCAL/Gpt/Gpt.c(302): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void WTIMER4A_Handler(void)         {if (gptCallbackNotifications[10] != NULL_PTR)      gptCallbackNotifications[10];} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(241): warning: expression result unused [-Wunused-value]
+COTS/MCAL/Gpt/Gpt.c(302): warning: expression result unused [-Wunused-value]
 void WTIMER4A_Handler(void)         {if (gptCallbackNotifications[10] != NULL_PTR)      gptCallbackNotifications[10];} 
                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~ ~~^
-COTS/MCAL/Gpt/Gpt.c(242): warning: no previous prototype for function 'WTIMER5A_Handler' [-Wmissing-prototypes]
+COTS/MCAL/Gpt/Gpt.c(303): warning: no previous prototype for function 'WTIMER5A_Handler' [-Wmissing-prototypes]
 void WTIMER5A_Handler(void)         {if (gptCallbackNotifications[11] != NULL_PTR)      gptCallbackNotifications[11];} 
      ^
-COTS/MCAL/Gpt/Gpt.c(242): note: declare 'static' if the function is not intended to be used outside of this translation unit
+COTS/MCAL/Gpt/Gpt.c(303): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void WTIMER5A_Handler(void)         {if (gptCallbackNotifications[11] != NULL_PTR)      gptCallbackNotifications[11];} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(242): warning: expression result unused [-Wunused-value]
+COTS/MCAL/Gpt/Gpt.c(303): warning: expression result unused [-Wunused-value]
 void WTIMER5A_Handler(void)         {if (gptCallbackNotifications[11] != NULL_PTR)      gptCallbackNotifications[11];} 
                                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~ ~~^
-31 warnings generated.
+36 warnings generated.
 compiling Gpt.c...
 COTS/MCAL/Config/Gpt_Lcfg.c(16): warning: In file included from...
 ./COTS/MCAL/Include\Gpt_Types.h(46): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
@@ -375,10 +395,7 @@ COTS/MCAL/Config/Gpt_Lcfg.c(18): warning: In file included from...
 ./COTS/APPLICATION\APPL_MAIN.h(8): warning: '/*' within block comment [-Wcomment]
  *  Description:  /* Board Support Package for the EK-TM4C123GXL board */    
                   ^
-COTS/MCAL/Config/Gpt_Lcfg.c(60): warning: excess elements in array initializer [-Wexcess-initializers]
-    {
-    ^
-6 warnings generated.
+5 warnings generated.
 compiling Gpt_Lcfg.c...
 assembling startup_TM4C123.s...
 RTE/Device/TM4C123GH6PM/system_TM4C123.c(13): warning: In file included from...
@@ -521,8 +538,8 @@ RTE/Device/TM4C123GH6PM/system_TM4C123.c(19): warning: // comments are not allow
 45 warnings generated.
 compiling system_TM4C123.c...
 linking...
-Program Size: Code=4216 RO-data=736 RW-data=4 ZI-data=624  
-".\Objects\Project1_Blinking_LED_control.axf" - 0 Error(s), 120 Warning(s).
+Program Size: Code=4548 RO-data=744 RW-data=4 ZI-data=624  
+".\Objects\Project1_Blinking_LED_control.axf" - 0 Error(s), 124 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -548,10 +565,10 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: Keil::Device:Startup:1.0.1
-      Source file:   Device/Source/ARM/startup_TM4C123.s
-      Source file:   Device/Source/system_TM4C123.c
       Include file:  Device/Include/TM4C123/TM4C123.h
-Build Time Elapsed:  00:00:04
+      Source file:   Device/Source/system_TM4C123.c
+      Source file:   Device/Source/ARM/startup_TM4C123.s
+Build Time Elapsed:  00:00:20
 </pre>
 </body>
 </html>

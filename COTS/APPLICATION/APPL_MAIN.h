@@ -46,6 +46,7 @@
  *  GLOBAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
 
+
 void Appl_DimmingHanlder(void);
 void Appl_SecTimerHanlder(void);
 void Appl_SecStartUpConfig(void);
