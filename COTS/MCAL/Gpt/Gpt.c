@@ -45,6 +45,7 @@ static void Gpt_LoadIntervalVal(Gpt_ChannelType channelId, Gpt_PredefTimerType g
 
 //GptLoadSet
 static void Gpt_IntCtl(Gpt_ChannelType channelId);
+static void enableGptClkGating(const Gpt_ConfigType * ConfigPtr);
 
 
 /*Gpt_GetCurrVal()
@@ -104,12 +105,32 @@ static void Gpt_IntCtl(Gpt_ChannelType channelId);
 
 
 /******************************************************************************
-* \Syntax          : void Gpt_ReadChannel(void)                                      
-* \Description     :    GPTMCFG: 
+* \Syntax          : void Gpt_Init(const Gpt_ConfigType * ConfigPtr)
+* \Description     :     
 *                  - initalize Timer HW config
 *                  - Disable All int notification 
 *                  - Set Operation mode -> Normal mode (will skip sleep mode for now)
 *                  - Start all GPT Predef Timers at '0' Value                                                         
+*       Detailed Steps:
+*       - Step 0 as precondition is to enable Clock Gating for the driver.
+*       - The GPTM is configured for One-Shot and Periodic modes by the following sequence:
+*       - 1. Ensure the timer is disabled (the TnEN bit in the GPTMCTL register is cleared) before making
+*       - any changes.
+*       - 2. Write the GPTM Configuration Register (GPTMCFG) with a value of 0x0000.0000.
+*       - 3. Configure the TnMR field in the GPTM Timer n Mode Register (GPTMTnMR):
+*       - a. Write a value of 0x1 for One-Shot mode.
+*       - b. Write a value of 0x2 for Periodic mode.
+*       - 4. Optionally configure the TnSNAPS, TnWOT, TnMTE, and TnCDIR bits in the GPTMTnMR register
+*       - to select whether to capture the value of the free-running timer at time-out, use an external
+*       - trigger to start counting, configure an additional trigger or interrupt, and count up or down.
+*       - 5. Load the start value into the GPTM Timer n Interval Load Register (GPTMTnILR).   
+*       - 6. If interrupts are required, set the appropriate bits in the GPTM Interrupt Mask Register
+*           (GPTMIMR).
+*       - 7. Set the TnEN bit in the GPTMCTL register to enable the timer and start counting.
+*       - 8. Poll the GPTMRIS register or wait for the interrupt to be generated (if enabled). In both cases,
+*           the status flags are cleared by writing a 1 to the appropriate bit of the GPTM Interrupt Clear
+*            Register (GPTMICR).
+*
 * \Sync\Async      : Synchronous                                               
 * \Reentrancy      : Non Reentrant                                             
 * \Parameters (in) : None                     
@@ -117,20 +138,27 @@ static void Gpt_IntCtl(Gpt_ChannelType channelId);
 * \Return value:   : None
 *******************************************************************************/
 
-
+volatile uint32  tempRegVal  = 0xFFFFFFFF;
+volatile uint32* tempRegAddr1 = 0xFFFFFFFF;
+volatile uint32* tempRegAddr2 = 0xFFFFFFFF;
 void Gpt_Init(const Gpt_ConfigType * ConfigPtr)
 {
-    /*
-    - initalize Timer HW config
-    - Disable All int notification 
-    - Set Operation mode -> Normal mode (will skip sleep mode for now)
-    - Start all GPT Predef Timers at '0' Value
-    */
     
-    uint8 configuredPinIndex;
     
+    uint8 configuredPinIndex = 0;
+    /* As a precondition is to enable Clock Gating for the driver.*/
+    enableGptClkGating(ConfigPtr);
+
+
     for (configuredPinIndex=0;configuredPinIndex < GPT_MAX_CH_NO; configuredPinIndex++)
     {
+
+                /*1. Ensure the timer is disabled (the TnEN bit in the GPTMCTL register is cleared)*/
+
+            (GPTMCTL((ConfigPtr[configuredPinIndex].channelId))) &= ~(GPTMCTL_TAEN | GPTMCTL_TBEN);
+            /*2. Write the GPTM Configuration Register (GPTMCFG) with a value of 0x0000.0000*/
+            GPTMCFG(ConfigPtr[configuredPinIndex].channelId) =0x00000000;
+
             (GPTMCFG((ConfigPtr[configuredPinIndex].channelId))) ^= GPTMCFG_TIMER_A_ONLY;  /*GPTMCFG - select TIMER A Only - Driver didn't support concatenated mode*/ 
             Gpt_SetMode(ConfigPtr[configuredPinIndex].channelId, ConfigPtr[configuredPinIndex].gptChannelMode);
             Gpt_IntCtl(ConfigPtr[configuredPinIndex].channelId);
@@ -224,6 +252,39 @@ static void Gpt_IntCtl(Gpt_ChannelType channelId)
     
 }
 
+
+
+static void enableGptClkGating(const Gpt_ConfigType * ConfigPtr)
+{   
+    /*Question: why Setting the same bit again will clear it*/
+    uint8 configuredChIndex     = 0;
+    uint8 usedDriBitmap         = 0x00;
+    uint8 usedWDriBitmap        = 0x00;
+    
+    for (configuredChIndex=0;configuredChIndex < GPT_MAX_CH_NO; configuredChIndex++)
+    {
+        if((ConfigPtr[configuredChIndex].channelId) <= GPT_TMR5)
+        {
+            usedDriBitmap ^= (1<< ConfigPtr[configuredChIndex].channelId);  
+        } 
+            else
+        {
+            usedWDriBitmap ^= (1<< ((ConfigPtr[configuredChIndex].channelId)-(GPT_TMR6)));  
+        } 
+
+    }
+    
+    RCGCTIMER ^= (uint32)usedDriBitmap;  
+    
+    RCGCWTIMER^= (uint32)usedWDriBitmap;   
+    /*Timer Reset 
+    SRWTIMER  ^= (uint32)usedWDriBitmap;  
+
+    SRWTIMER  &= ~((uint32)usedWDriBitmap); Reset is completed by setting then resetting the corresponding Bits*/   
+
+
+
+}
 
 
 /* Interrupt Handlers Implmentation*/

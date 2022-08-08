@@ -132,6 +132,12 @@ typedef union
 #define PORTX_APB_BASE_ADDRESS(X)           ((X<=3)? (0x40004000 + (X*0x1000)):(0x40024000 + ((X-4)*0x1000)))
 
 #define RCGCGPIO                            *((volatile uint32*)(SYSTEM_CTRL_BASE_ADDRESS+0x608))
+#define SRWTIMER                            *((volatile uint32*)(SYSTEM_CTRL_BASE_ADDRESS+0x55C))
+#define RCGCTIMER                           *((volatile uint32*)(SYSTEM_CTRL_BASE_ADDRESS+0x604))
+#define RCGCWTIMER                          *((volatile uint32*)(SYSTEM_CTRL_BASE_ADDRESS+0x65C))
+
+
+
 #define APINT                               *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0xD0C))
 #define INTCTRL                             *((volatile INTCTRL_Tag*)(CORTEXM4_PERI_BASE_ADDRESS+0xD04))  /*DONE*/
 

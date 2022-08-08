@@ -59,8 +59,8 @@ void IntCrtl_Init(void)
     /*Enable required GPT interrupts*/
     
     NVIC_EN1 ^= 0x40000000;   /*IQR 94 - WTIMER0A_Handler*/   
-    NVIC_EN2 ^= 0x02;   /*IQR 96 - WTIMER1A_Handler*/
-    NVIC_EN3 ^= 0x04;   /*IQR 98 - WTIMER2A_Handler*/
+    NVIC_EN2 ^= 0x02;         /*IQR 96 - WTIMER1A_Handler*/
+    NVIC_EN3 ^= 0x04;         /*IQR 98 - WTIMER2A_Handler*/
     __enable_irq(); /* global enable IRQs */
 
     
