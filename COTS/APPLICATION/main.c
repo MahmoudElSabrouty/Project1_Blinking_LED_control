@@ -44,9 +44,9 @@ typedef enum{
     static sint8 ontimeCalc =0; 
     static sint8 offtimeCalc =0;
 
-    static SystemStates stateMachine =CONFIG_MODE;
-    static sint8 onTimeInputCounterSec =0;
-    static sint8 offTimeInputCounterSec =0;
+ static  SystemStates stateMachine =CONFIG_MODE;
+ static  sint8 onTimeInputCounterSec =0;
+ static  sint8 offTimeInputCounterSec =0;
 
 /**********************************************************************************************************************
  *  GLOBAL DATA
@@ -91,11 +91,39 @@ main(void)
 {
     static Dio_LevelType sw1State = DIO_PIN_SNA;
     static Dio_LevelType sw2State = DIO_PIN_SNA;
+#if 1
+	  RCGCGPIO |= (1<<5);   /* Set bit5 of RCGCGPIO to enable clock to PORTF*/
     
+	 /* PORTF0 has special function, need to unlock to modify */
+    PORTF_ِAPB_GPIOLOCK = 0x4C4F434B;   /* unlock commit register */
+    PORTF_ِAPB_GPIOCR = 0x01;           /* make PORTF0 configurable */
+    PORTF_ِAPB_GPIOLOCK = 0;            /* lock commit register */
+
+
+    /*Initialize PF3 as a digital output, PF0 and PF4 as digital input pins */
+	
+    PORTF_ِAPB_GPIODIR &= ~(1<<4)|~(1<<0);  /* Set PF4 and PF0 as a digital input pins */
+    PORTF_ِAPB_GPIODIR |= (1<<3);           /* Set PF3 as digital output to control green LED */
+    PORTF_ِAPB_GPIODEN |= (1<<4)|(1<<3)|(1<<0);             /* make PORTF4-0 digital pins */
+    PORTF_ِAPB_GPIOPUR |= (1<<4)|(1<<0);             /* enable pull up for PORTF4, 0 */
+    
+    /* configure PORTF4, 0 for falling edge trigger interrupt */
+    PORTF_ِAPB_GPIOIS  &= ~(1<<4)|~(1<<0);        /* make bit 4, 0 edge sensitive */
+    PORTF_ِAPB_GPIOIBE &=~(1<<4)|~(1<<0);         /* trigger is controlled by IEV */
+    PORTF_ِAPB_GPIOIEV &= ~(1<<4)|~(1<<0);        /* falling edge trigger */
+    PORTF_ِAPB_GPIOICR |= (1<<4)|(1<<0);          /* clear any prior interrupt */
+    PORTF_ِAPB_GPIOIM  |= (1<<4)|(1<<0);          /* unmask interrupt */
+    
+    /* enable interrupt in NVIC and set priority to 3 */
+   // NVIC->IP[30] = 3 << 5;     /* set interrupt priority to 3 */
+    NVIC_EN0 |= (1<<30);      /*IQR 30 - Enable PORTF Interrupt */
+
+
+#else
     Port_Init(PortConfigPtr);
     Gpt_Init(GptConfigPtr);
     IntCrtl_Init();
-
+#endif
 
 	while(1){
 
@@ -103,8 +131,7 @@ main(void)
         {
             case CONFIG_MODE:
 
-                sw1State = Dio_ReadChannel(PIN_SW1, PORT_SW1);
-                sw2State = Dio_ReadChannel(PIN_SW2, PORT_SW2);
+
                 HandleUserInput(sw1State,sw2State);
 
             break;
@@ -277,30 +304,38 @@ static void    RunningStateHanlder(void)
 static void HandleUserInput( Dio_LevelType sw1Status,  Dio_LevelType sw2Status)
 {
     static uint8 startTimerOnce =0;
-    uint8 iter = 100;
+    
     if (startTimerOnce ==0)
     {
            Gpt_StartTimer(GPT_TMR6,GPT_PREDEF_TIMER_1000MS_32BIT);
            startTimerOnce =0xFF;
     }
 
-    while (iter > 0) {  
-        /*input switch debounce*/
-        --iter;
-    }
 
-    if (sw1Status == DIO_PIN_HIGH)
-    {
-            onTimeInputCounterSec++;
-    }
 
-    if (sw2Status == DIO_PIN_HIGH)
-    {
-            offTimeInputCounterSec++;
-    }
 
 }
 
+
+
+
+void GpioIsrHandler(void)
+{
+
+    if(stateMachine ==CONFIG_MODE)
+    {
+        if (PORTF_ِAPB_GPIOMIS & (1<<PIN_SW1)) /* check if interrupt causes by PF4/SW1*/
+        {  
+            onTimeInputCounterSec++;
+            PORTF_ِAPB_GPIOICR |= (1<<PIN_SW1); 
+        }
+        else if (PORTF_ِAPB_GPIOMIS & (1<<PIN_SW2)) /* check if interrupt causes by PF0/SW2 */
+        { 
+            offTimeInputCounterSec++;
+            PORTF_ِAPB_GPIOICR |= (1<<PIN_SW2); 
+        }
+    }
+}
 /**********************************************************************************************************************
  *  END OF FILE: Main.c
  *********************************************************************************************************************/

@@ -159,7 +159,7 @@ void Gpt_Init(const Gpt_ConfigType * ConfigPtr)
             /*2. Write the GPTM Configuration Register (GPTMCFG) with a value of 0x0000.0000*/
             GPTMCFG(ConfigPtr[configuredPinIndex].channelId) =0x00000000;
 
-            (GPTMCFG((ConfigPtr[configuredPinIndex].channelId))) ^= GPTMCFG_TIMER_A_ONLY;  /*GPTMCFG - select TIMER A Only - Driver didn't support concatenated mode*/ 
+            (GPTMCFG((ConfigPtr[configuredPinIndex].channelId))) |= GPTMCFG_TIMER_A_ONLY;  /*GPTMCFG - select TIMER A Only - Driver didn't support concatenated mode*/ 
             Gpt_SetMode(ConfigPtr[configuredPinIndex].channelId, ConfigPtr[configuredPinIndex].gptChannelMode);
             Gpt_IntCtl(ConfigPtr[configuredPinIndex].channelId);
 
@@ -185,15 +185,15 @@ static void Gpt_SetMode(Gpt_ChannelType channelId, Gpt_ChannelModeType chaMode){
     switch(chaMode)
     {
         case GPT_CH_MODE_CONTINUOUS_COUNTUP: 
-            GPTMTAMR(channelId) ^= (GPTMCFG_TAMR_PERIODIC | GPTMCFG_TACDIR_COUNTUP);
+            GPTMTAMR(channelId) |= (GPTMCFG_TAMR_PERIODIC | GPTMCFG_TACDIR_COUNTUP);
         break;
 
         case GPT_CH_MODE_ONESHOT_COUNTUP: 
-            GPTMTAMR(channelId) ^= (GPTMCFG_TAMR_ONESHOT | GPTMCFG_TACDIR_COUNTUP);
+            GPTMTAMR(channelId) |= (GPTMCFG_TAMR_ONESHOT | GPTMCFG_TACDIR_COUNTUP);
         break;
 #ifdef GPT_PWM_ENABLE
         case GPT_CH_MODE_PWM_PERIODIC: 
-            GPTMTAMR(channelId) ^= (GPTMCFG_TAAMS_PWM_ENABLE | GPTMCFG_TAMR_PERIODIC | GPTMCFG_TAPWMIE_ENABLE);
+            GPTMTAMR(channelId) |= (GPTMCFG_TAAMS_PWM_ENABLE | GPTMCFG_TAMR_PERIODIC | GPTMCFG_TAPWMIE_ENABLE);
         break;
 #endif
 
@@ -216,7 +216,7 @@ static void Gpt_SetMode(Gpt_ChannelType channelId, Gpt_ChannelModeType chaMode){
 void Gpt_StartTimer(Gpt_ChannelType channelId, Gpt_ValueType TimerVale)
 {
     
-    GPTMCTL(channelId) ^= (GPTMCTL_TAEN); /*Enable Timer A interrupts */
+    GPTMCTL(channelId) |= (GPTMCTL_TAEN); /*Enable Timer A interrupts */
     
 } 
 /******************************************************************************
@@ -248,7 +248,7 @@ static void Gpt_IntCtl(Gpt_ChannelType channelId)
          - GPTMIMR.TBTOIM-> Timer B time-out interrupt enable(1)
          - GPTMIMR.RTCIM -> Timer RTC time-out interrupt enable(1) */
 
-        GPTMIMR(channelId) ^= (GPTMIMR_TATOIM); /*Enable Timer A interrupts */
+        GPTMIMR(channelId) |= (GPTMIMR_TATOIM); /*Enable Timer A interrupts */
     
 }
 
@@ -265,20 +265,20 @@ static void enableGptClkGating(const Gpt_ConfigType * ConfigPtr)
     {
         if((ConfigPtr[configuredChIndex].channelId) <= GPT_TMR5)
         {
-            usedDriBitmap ^= (1<< ConfigPtr[configuredChIndex].channelId);  
+            usedDriBitmap |= (1<< ConfigPtr[configuredChIndex].channelId);  
         } 
             else
         {
-            usedWDriBitmap ^= (1<< ((ConfigPtr[configuredChIndex].channelId)-(GPT_TMR6)));  
+            usedWDriBitmap |= (1<< ((ConfigPtr[configuredChIndex].channelId)-(GPT_TMR6)));  
         } 
 
     }
     
-    RCGCTIMER ^= (uint32)usedDriBitmap;  
+    RCGCTIMER |= (uint32)usedDriBitmap;  
     
-    RCGCWTIMER^= (uint32)usedWDriBitmap;   
+    RCGCWTIMER|= (uint32)usedWDriBitmap;   
     /*Timer Reset 
-    SRWTIMER  ^= (uint32)usedWDriBitmap;  
+    SRWTIMER  |= (uint32)usedWDriBitmap;  
 
     SRWTIMER  &= ~((uint32)usedWDriBitmap); Reset is completed by setting then resetting the corresponding Bits*/   
 

@@ -50,7 +50,7 @@
 void Appl_DimmingHanlder(void);
 void Appl_SecTimerHanlder(void);
 void Appl_SecStartUpConfig(void);
-
+void GpioIsrHandler(void);
 #endif  /* APPL_MAIN_H */
 
 /**********************************************************************************************************************

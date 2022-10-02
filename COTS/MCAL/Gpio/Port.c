@@ -32,6 +32,7 @@
  *  LOCAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
     static void enablePortClkGating(const Port_ConfigType * ConfigPtr);
+    static void enablePortXPinInterrupt(Port_PinInterruptEnable intStatus, PORT_ChannelName chNum,PORT_PortName portName);
     static void setPortXPinDir(Port_PinDirectionType pinDir, PORT_ChannelName chNum,PORT_PortName portName);
     static void setPortXPinMode(Port_PinModeType pinMode, PORT_ChannelName chNum,PORT_PortName portName);
     static void setPortXpinIntAttach(Port_PinInternalAttachType pinAttach, PORT_ChannelName chNum,PORT_PortName portName);
@@ -42,6 +43,19 @@
  *  LOCAL FUNCTIONS
  *********************************************************************************************************************/
 
+static void enablePortXPinInterrupt(Port_PinInterruptEnable intStatus, PORT_ChannelName chNum,PORT_PortName portName)
+{		
+	if (intStatus == ENABLED)
+    {			
+          (PORTX_ِAPB_GPIOIM(portName)) |= (1<< chNum);      /*Enable corresponding interrupt*/
+          (PORTX_ِAPB_GPIORIS(portName))|= (1<< chNum);     /*Configure corresponding interrupt Level Sensitive*/
+          (PORTX_ِAPB_GPIOIEV(portName))|= (1<< chNum);     /*Configure corresponding interrupt Level High*/
+    }
+}
+
+
+
+
 static void enablePortClkGating(const Port_ConfigType * ConfigPtr)
 {   
     /*Question: why Setting the same bit again will clear it*/
@@ -49,7 +63,7 @@ static void enablePortClkGating(const Port_ConfigType * ConfigPtr)
     uint8 usedPortsBitmap = 0x00;
     for (configuredPinIndex=0;configuredPinIndex < PORT_MAX_PIN_NO; configuredPinIndex++)
     {
-        usedPortsBitmap ^= (1<< ConfigPtr[configuredPinIndex].PortName);  
+        usedPortsBitmap |= (1<< ConfigPtr[configuredPinIndex].PortName);  
     }
     
     RCGCGPIO  = usedPortsBitmap;  
@@ -64,14 +78,14 @@ static void setPortXPinDir(Port_PinDirectionType pinDir, PORT_ChannelName chNum,
 {
 	
 	PORTX_ِAPB_GPIOLOCK(portName) = GPIO_UNLOCK_PATTERN;
-    PORTX_ِAPB_GPIOCR(portName) ^= (1<< chNum);         
+    PORTX_ِAPB_GPIOCR(portName) |= (1<< chNum);         
 		
 	if (pinDir == PIN_IN)
     {			
         (PORTX_ِAPB_GPIODIR(portName)) &= (~(1<< chNum)); 
     }else if (pinDir == PIN_OUT)
     {
-          (PORTX_ِAPB_GPIODIR(portName)) ^= (1<< chNum);  
+          (PORTX_ِAPB_GPIODIR(portName)) |= (1<< chNum);  
     }
 }
 
@@ -83,25 +97,25 @@ static void setPortXPinMode(Port_PinModeType pinMode, PORT_ChannelName chNum,POR
         /* Diagital Enable for corresponding PIN & PORT*/
         PORTX_ِAPB_GPIOLOCK(portName) = GPIO_UNLOCK_PATTERN;
 
-        PORTX_ِAPB_GPIOCR(portName) ^= (1<< chNum);         
-        PORTX_ِAPB_GPIODEN(portName) ^= (1<< chNum);         
+        PORTX_ِAPB_GPIOCR(portName) |= (1<< chNum);         
+        PORTX_ِAPB_GPIODEN(portName) |= (1<< chNum);         
     }
 }
 
 static void setPortXpinIntAttach(Port_PinInternalAttachType pinAttach, PORT_ChannelName chNum,PORT_PortName portName)
 {
     PORTX_ِAPB_GPIOLOCK(portName) = GPIO_UNLOCK_PATTERN;
-    PORTX_ِAPB_GPIOCR(portName) ^= (1<< chNum);    
+    PORTX_ِAPB_GPIOCR(portName) |= (1<< chNum);    
 
     if (pinAttach == PULL_UP)
     {
-        PORTX_ِAPB_GPIOPUR(portName) ^= (1<< chNum); 
+        PORTX_ِAPB_GPIOPUR(portName) |= (1<< chNum); 
     }else if (pinAttach == PULL_DOWN)
     {
-        PORTX_ِAPB_GPIOPDR(portName) ^= (1<< chNum);  
+        PORTX_ِAPB_GPIOPDR(portName) |= (1<< chNum);  
     }else if (pinAttach == OPEN_DRAIN)
     {
-        PORTX_ِAPB_GPIOODR(portName) ^= (1<< chNum);  
+        PORTX_ِAPB_GPIOODR(portName) |= (1<< chNum);  
     }
 
 }
@@ -158,6 +172,7 @@ void Port_Init(const Port_ConfigType * ConfigPtr)
     {
     	setPortXPinDir(ConfigPtr[configuredPinIndex].pinDir, ConfigPtr[configuredPinIndex].ChannelName,ConfigPtr[configuredPinIndex].PortName);                      /* 2. Set the direction*/
         setPortXPinMode(ConfigPtr[configuredPinIndex].PortPinMode, ConfigPtr[configuredPinIndex].ChannelName,ConfigPtr[configuredPinIndex].PortName);                /* 3. Alternate pin Function &  6. Enable GPIO digital I/Os*/
+        enablePortXPinInterrupt(ConfigPtr[configuredPinIndex].pinInterruptEnable, ConfigPtr[configuredPinIndex].ChannelName,ConfigPtr[configuredPinIndex].PortName);
                                                                                                             /* 4. Drive strength - Skipped - keep Default        */    
         setPortXpinIntAttach(ConfigPtr[configuredPinIndex].pinIntAttach, ConfigPtr[configuredPinIndex].ChannelName,ConfigPtr[configuredPinIndex].PortName);          /* 5. Program Pad */   
         /* 7. interrupt Config*/                                                                                                    /* 7. interrupt Config*/

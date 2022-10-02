@@ -72,6 +72,12 @@ typedef enum {
     OPEN_DRAIN
 }Port_PinInternalAttachType;
 
+
+typedef enum {
+    DISABLED =0,
+    ENABLED,
+}Port_PinInterruptEnable;
+
 /*
 typedef enum {
     MA_2,
@@ -88,6 +94,7 @@ typedef struct port_Types
     Port_PinDirectionType       pinDir;
     Port_PinModeType            PortPinMode;
     Port_PinInternalAttachType  pinIntAttach;
+    Port_PinInterruptEnable     pinInterruptEnable; 
     /*Port_PinOutputCurrentType   pinOutCurr;*/
 }Port_ConfigType;
 

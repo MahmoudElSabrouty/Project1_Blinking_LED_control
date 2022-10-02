@@ -27,6 +27,11 @@ Project File Date:  08/03/2022
 <h2>Output:</h2>
 *** Using Compiler 'V6.18', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
+COTS/MCAL/IntCtrl/IntCtrl.c(64): warning: implicit declaration of function '__enable_irq' [-Wimplicit-function-declaration]
+    __enable_irq(); /* global enable IRQs */
+    ^
+1 warning generated.
+compiling IntCtrl.c...
 compiling IntCtrl_Lcfg.c...
 COTS/MCAL/Config/Port_Lcfg.c(16): warning: In file included from...
 ./COTS/HAL\Port_Cfg.h(17): warning: In file included from...
@@ -36,54 +41,17 @@ COTS/MCAL/Config/Port_Lcfg.c(16): warning: In file included from...
 ./COTS/MCAL/Include\Port_Types.h(66): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
     PIN_GPIO =0,  /*By Default GPIO*/
                ^~
+./COTS/MCAL/Include\Port_Types.h(78): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    ENABLED,
+           ^
 COTS/MCAL/Config/Port_Lcfg.c(31): warning: no previous extern declaration for non-static variable 'PortConfigPtr' [-Wmissing-variable-declarations]
 const Port_ConfigType PortConfigPtr[PORT_MAX_PIN_NO] = 
                       ^
 COTS/MCAL/Config/Port_Lcfg.c(31): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 const Port_ConfigType PortConfigPtr[PORT_MAX_PIN_NO] = 
       ^
-3 warnings generated.
+4 warnings generated.
 compiling Port_Lcfg.c...
-COTS/MCAL/IntCtrl/IntCtrl.c(64): warning: implicit declaration of function '__enable_irq' [-Wimplicit-function-declaration]
-    __enable_irq(); /* global enable IRQs */
-    ^
-1 warning generated.
-compiling IntCtrl.c...
-COTS/MCAL/Gpio/Dio.c(16): warning: In file included from...
-./COTS/MCAL/Include\Dio.h(19): warning: In file included from...
-./COTS/MCAL/Include/Dio_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    DIO_CH8,
-           ^
-./COTS/MCAL/Include/Dio_Types.h(57): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    DIO_PIN_SNA =0xFF,
-                     ^
-COTS/MCAL/Gpio/Dio.c(109): warning: // comments are not allowed in this language [-Wcomment]
-    //TempRegVar = &( PORTX_ِAPB_GPIODATA_MASK(portName, portMask));
-    ^
-COTS/MCAL/Gpio/Dio.c(29): warning: no previous extern declaration for non-static variable 'TempRegVar' [-Wmissing-variable-declarations]
-volatile uint32* TempRegVar;
-                 ^
-COTS/MCAL/Gpio/Dio.c(29): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-volatile uint32* TempRegVar;
-         ^
-4 warnings generated.
-compiling Dio.c...
-COTS/MCAL/Gpio/Port.c(16): warning: In file included from...
-./COTS/MCAL/Include\Port.h(18): warning: In file included from...
-./COTS/MCAL/Include/Port_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    CH8,
-       ^
-./COTS/MCAL/Include/Port_Types.h(66): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    PIN_GPIO =0,  /*By Default GPIO*/
-               ^~
-COTS/MCAL/Gpio/Port.c(82): warning: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Wextra-semi-stmt]
-        /*Do Nothing for Alternate Function - default Mode is GPIO*/;
-                                                                    ^
-COTS/MCAL/Gpio/Port.c(57): warning: unused function 'unlockPort' [-Wunused-function]
-static void unlockPort(PORT_PortName portName)
-            ^
-4 warnings generated.
-compiling Port.c...
 COTS/APPLICATION/main.c(16): warning: In file included from...
 ./COTS/MCAL/Include\Gpt.h(19): warning: In file included from...
 ./COTS/MCAL/Include/Gpt_Types.h(46): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
@@ -106,6 +74,9 @@ COTS/APPLICATION/main.c(17): warning: In file included from...
 ./COTS/MCAL/Include/Port_Types.h(66): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
     PIN_GPIO =0,  /*By Default GPIO*/
                ^~
+./COTS/MCAL/Include/Port_Types.h(78): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    ENABLED,
+           ^
 COTS/APPLICATION/main.c(18): warning: In file included from...
 ./COTS/MCAL/Include\Dio.h(19): warning: In file included from...
 ./COTS/MCAL/Include/Dio_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
@@ -124,95 +95,148 @@ COTS/APPLICATION/main.c(29): warning: commas at the end of enumerator lists are 
 COTS/APPLICATION/main.c(34): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
     DIMMING_TIME,
                 ^
-COTS/APPLICATION/main.c(97): warning: implicit declaration of function 'IntCrtl_Init' [-Wimplicit-function-declaration]
-    IntCrtl_Init();
-    ^
-COTS/APPLICATION/main.c(106): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
-                sw1State = Dio_ReadChannel(PIN_SW1, PORT_SW1);
-                           ~~~~~~~~~~~~~~~          ^~~~~~~~
-./COTS/HAL\Port_Cfg.h(31): note: expanded from macro 'PORT_SW1'
-#define PORT_SW1                PORTF
-                                ^~~~~
-COTS/APPLICATION/main.c(106): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
-                sw1State = Dio_ReadChannel(PIN_SW1, PORT_SW1);
-                           ~~~~~~~~~~~~~~~ ^~~~~~~
-./COTS/HAL\Port_Cfg.h(32): note: expanded from macro 'PIN_SW1'
-#define PIN_SW1                 CH4
-                                ^~~
-COTS/APPLICATION/main.c(107): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
-                sw2State = Dio_ReadChannel(PIN_SW2, PORT_SW2);
-                           ~~~~~~~~~~~~~~~          ^~~~~~~~
-./COTS/HAL\Port_Cfg.h(34): note: expanded from macro 'PORT_SW2'
-#define PORT_SW2                PORTF
-                                ^~~~~
-COTS/APPLICATION/main.c(107): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
-                sw2State = Dio_ReadChannel(PIN_SW2, PORT_SW2);
-                           ~~~~~~~~~~~~~~~ ^~~~~~~
-./COTS/HAL\Port_Cfg.h(35): note: expanded from macro 'PIN_SW2'
-#define PIN_SW2                 CH0                
-                                ^~~
-COTS/APPLICATION/main.c(179): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
+COTS/APPLICATION/main.c(105): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+    PORTF_ِAPB_GPIODIR &= ~(1<<4)|~(1<<0);  /* Set PF4 and PF0 as a digital input pins */
+                      ~~ ~~~~~~~^~~~~~~~
+COTS/APPLICATION/main.c(111): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+    PORTF_ِAPB_GPIOIS  &= ~(1<<4)|~(1<<0);        /* make bit 4, 0 edge sensitive */
+                      ~~ ~~~~~~~^~~~~~~~
+COTS/APPLICATION/main.c(112): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+    PORTF_ِAPB_GPIOIBE &=~(1<<4)|~(1<<0);         /* trigger is controlled by IEV */
+                      ~~~~~~~~~^~~~~~~~
+COTS/APPLICATION/main.c(113): warning: implicit conversion changes signedness: 'int' to 'unsigned long' [-Wsign-conversion]
+    PORTF_ِAPB_GPIOIEV &= ~(1<<4)|~(1<<0);        /* falling edge trigger */
+                      ~~ ~~~~~~~^~~~~~~~
+COTS/APPLICATION/main.c(118): warning: // comments are not allowed in this language [-Wcomment]
+   // NVIC->IP[30] = 3 << 5;     /* set interrupt priority to 3 */
+   ^
+COTS/APPLICATION/main.c(206): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
                 ~~~~~~~~~~~~~~~~           ^~~~~~~~~
 ./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
 #define PORT_LED1               PORTF
                                 ^~~~~
-COTS/APPLICATION/main.c(179): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
+COTS/APPLICATION/main.c(206): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
                 ~~~~~~~~~~~~~~~~ ^~~~~~~~
 ./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
 #define PIN_LED1                CH1
                                 ^~~
-COTS/APPLICATION/main.c(194): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
+COTS/APPLICATION/main.c(221): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
                 ~~~~~~~~~~~~~~~~           ^~~~~~~~~
 ./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
 #define PORT_LED1               PORTF
                                 ^~~~~
-COTS/APPLICATION/main.c(194): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
+COTS/APPLICATION/main.c(221): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
                 ~~~~~~~~~~~~~~~~ ^~~~~~~~
 ./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
 #define PIN_LED1                CH1
                                 ^~~
-COTS/APPLICATION/main.c(219): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
+COTS/APPLICATION/main.c(246): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
     Dio_FlipChannel(PIN_LED1, PORT_LED1);    
     ~~~~~~~~~~~~~~~           ^~~~~~~~~
 ./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
 #define PORT_LED1               PORTF
                                 ^~~~~
-COTS/APPLICATION/main.c(219): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
+COTS/APPLICATION/main.c(246): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
     Dio_FlipChannel(PIN_LED1, PORT_LED1);    
     ~~~~~~~~~~~~~~~ ^~~~~~~~
 ./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
 #define PIN_LED1                CH1
                                 ^~~
-COTS/APPLICATION/main.c(242): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
+COTS/APPLICATION/main.c(269): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
                 ~~~~~~~~~~~~~~~~           ^~~~~~~~~
 ./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
 #define PORT_LED1               PORTF
                                 ^~~~~
-COTS/APPLICATION/main.c(242): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
+COTS/APPLICATION/main.c(269): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
                 ~~~~~~~~~~~~~~~~ ^~~~~~~~
 ./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
 #define PIN_LED1                CH1
                                 ^~~
-COTS/APPLICATION/main.c(253): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
+COTS/APPLICATION/main.c(280): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
                 ~~~~~~~~~~~~~~~~           ^~~~~~~~~
 ./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
 #define PORT_LED1               PORTF
                                 ^~~~~
-COTS/APPLICATION/main.c(253): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
+COTS/APPLICATION/main.c(280): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
                 ~~~~~~~~~~~~~~~~ ^~~~~~~~
 ./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
 #define PIN_LED1                CH1
                                 ^~~
-26 warnings generated.
+COTS/APPLICATION/main.c(304): warning: unused parameter 'sw1Status' [-Wunused-parameter]
+static void HandleUserInput( Dio_LevelType sw1Status,  Dio_LevelType sw2Status)
+                                           ^
+COTS/APPLICATION/main.c(304): warning: unused parameter 'sw2Status' [-Wunused-parameter]
+static void HandleUserInput( Dio_LevelType sw1Status,  Dio_LevelType sw2Status)
+                                                                     ^
+29 warnings generated.
 compiling main.c...
+COTS/MCAL/Gpio/Dio.c(16): warning: In file included from...
+./COTS/MCAL/Include\Dio.h(19): warning: In file included from...
+./COTS/MCAL/Include/Dio_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    DIO_CH8,
+           ^
+./COTS/MCAL/Include/Dio_Types.h(57): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    DIO_PIN_SNA =0xFF,
+                     ^
+COTS/MCAL/Gpio/Dio.c(17): warning: In file included from...
+./COTS/HAL\Port_Cfg.h(17): warning: In file included from...
+./COTS/MCAL/Include\Port_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    CH8,
+       ^
+./COTS/MCAL/Include\Port_Types.h(66): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    PIN_GPIO =0,  /*By Default GPIO*/
+               ^~
+./COTS/MCAL/Include\Port_Types.h(78): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    ENABLED,
+           ^
+COTS/MCAL/Gpio/Dio.c(109): warning: // comments are not allowed in this language [-Wcomment]
+    //TempRegVar = &( PORTX_ِAPB_GPIODATA_MASK(portName, portMask));
+    ^
+COTS/MCAL/Gpio/Dio.c(161): warning: implicit declaration of function 'GpioIsrHandler' [-Wimplicit-function-declaration]
+    GpioIsrHandler();
+    ^
+COTS/MCAL/Gpio/Dio.c(159): warning: no previous prototype for function 'GPIOF_Handler' [-Wmissing-prototypes]
+void GPIOF_Handler(void)
+     ^
+COTS/MCAL/Gpio/Dio.c(159): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void GPIOF_Handler(void)
+^
+static 
+COTS/MCAL/Gpio/Dio.c(29): warning: no previous extern declaration for non-static variable 'TempRegVar' [-Wmissing-variable-declarations]
+volatile uint32* TempRegVar;
+                 ^
+COTS/MCAL/Gpio/Dio.c(29): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+volatile uint32* TempRegVar;
+         ^
+9 warnings generated.
+compiling Dio.c...
+COTS/MCAL/Gpio/Port.c(16): warning: In file included from...
+./COTS/MCAL/Include\Port.h(18): warning: In file included from...
+./COTS/MCAL/Include/Port_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    CH8,
+       ^
+./COTS/MCAL/Include/Port_Types.h(66): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    PIN_GPIO =0,  /*By Default GPIO*/
+               ^~
+./COTS/MCAL/Include/Port_Types.h(78): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    ENABLED,
+           ^
+COTS/MCAL/Gpio/Port.c(96): warning: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Wextra-semi-stmt]
+        /*Do Nothing for Alternate Function - default Mode is GPIO*/;
+                                                                    ^
+COTS/MCAL/Gpio/Port.c(71): warning: unused function 'unlockPort' [-Wunused-function]
+static void unlockPort(PORT_PortName portName)
+            ^
+5 warnings generated.
+compiling Port.c...
 COTS/MCAL/Gpt/Gpt.c(16): warning: In file included from...
 ./COTS/MCAL/Include\Gpt.h(19): warning: In file included from...
 ./COTS/MCAL/Include/Gpt_Types.h(46): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
@@ -538,8 +562,8 @@ RTE/Device/TM4C123GH6PM/system_TM4C123.c(19): warning: // comments are not allow
 45 warnings generated.
 compiling system_TM4C123.c...
 linking...
-Program Size: Code=4548 RO-data=744 RW-data=4 ZI-data=624  
-".\Objects\Project1_Blinking_LED_control.axf" - 0 Error(s), 124 Warning(s).
+Program Size: Code=2436 RO-data=700 RW-data=4 ZI-data=624  
+".\Objects\Project1_Blinking_LED_control.axf" - 0 Error(s), 134 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -565,10 +589,10 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: Keil::Device:Startup:1.0.1
-      Include file:  Device/Include/TM4C123/TM4C123.h
-      Source file:   Device/Source/system_TM4C123.c
       Source file:   Device/Source/ARM/startup_TM4C123.s
-Build Time Elapsed:  00:00:20
+      Source file:   Device/Source/system_TM4C123.c
+      Include file:  Device/Include/TM4C123/TM4C123.h
+Build Time Elapsed:  00:00:09
 </pre>
 </body>
 </html>
