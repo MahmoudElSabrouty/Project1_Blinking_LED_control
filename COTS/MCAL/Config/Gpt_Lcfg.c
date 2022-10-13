@@ -37,9 +37,14 @@ const GptCallbackNotificationPtr gptCallbackNotifications[12]=
     NULL_PTR, /* Notification Callback for TIMER3A  */
     NULL_PTR, /* Notification Callback for TIMER4A  */
     NULL_PTR, /* Notification Callback for TIMER5A  */
-    &Appl_SecStartUpConfig, /* Notification Callback for WTIMER0A	*/
-    &Appl_DimmingHanlder, /* Notification Callback for WTIMER1A	*/
-    &Appl_SecTimerHanlder, /* Notification Callback for WTIMER2A	*/
+#ifndef USE_PRECONFIGURED_LIGHT_TIMING
+    Appl_SecStartUpConfig, /* Notification Callback for WTIMER0A	*/
+#else
+  //  NULL_PTR, /* Notification Callback for WTIMER0A  */
+   Appl_DimmingHanlder/*RunningStateHanlder*/,
+#endif
+    NULL_PTR, /* Notification Callback for WTIMER1A	*/
+    NULL_PTR, /* Notification Callback for WTIMER2A	*/
     NULL_PTR, /* Notification Callback for WTIMER3A	*/
     NULL_PTR, /* Notification Callback for WTIMER4A	*/
     NULL_PTR, /* Notification Callback for WTIMER5A	*/
@@ -47,7 +52,7 @@ const GptCallbackNotificationPtr gptCallbackNotifications[12]=
 
 const Gpt_ConfigType GptConfigPtr[GPT_MAX_CH_NO] = 
 {
-    {
+		{
         GPT_TMR6,
         GPT_CH_MODE_CONTINUOUS_COUNTUP,
         GPT_PREDEF_TIMER_1000MS_32BIT,
@@ -55,13 +60,11 @@ const Gpt_ConfigType GptConfigPtr[GPT_MAX_CH_NO] =
     {
         GPT_TMR7,
         GPT_CH_MODE_CONTINUOUS_COUNTUP,
-        GPT_PREDEF_TIMER_100MS_32BIT,
-    },
-    {
+        GPT_PREDEF_TIMER_1000MS_32BIT,
+    },{
         GPT_TMR8,
         GPT_CH_MODE_CONTINUOUS_COUNTUP,
         GPT_PREDEF_TIMER_1000MS_32BIT,
-        
     }
 };
 

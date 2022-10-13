@@ -20,7 +20,13 @@
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
 *********************************************************************************************************************/	
-#define MAX_ALLOWED_STARTUP_TIME_CONFIG     30
+#define MAX_ALLOWED_STARTUP_TIME_CONFIG     0
+
+#define USE_PRECONFIGURED_LIGHT_TIMING		
+#define PRECONFIGURED_LIGHT_ON_TIMING_SEC		10
+#define PRECONFIGURED_LIGHT_OFF_TIMING_SEC	15
+
+
 /**********************************************************************************************************************
  *  LOCAL DATA 
  *********************************************************************************************************************/
@@ -43,10 +49,19 @@ typedef enum{
 
     static sint8 ontimeCalc =0; 
     static sint8 offtimeCalc =0;
-
+#ifndef USE_PRECONFIGURED_LIGHT_TIMING
  static  SystemStates stateMachine =CONFIG_MODE;
- static  sint8 onTimeInputCounterSec =0;
- static  sint8 offTimeInputCounterSec =0;
+ #else
+ static  SystemStates stateMachine =RUNNING_MODE;
+ #endif
+
+#ifdef USE_PRECONFIGURED_LIGHT_TIMING
+static  sint8 onTimeInputCounterSec  = 	PRECONFIGURED_LIGHT_ON_TIMING_SEC;
+static  sint8 offTimeInputCounterSec =	PRECONFIGURED_LIGHT_OFF_TIMING_SEC;
+#else
+static  sint8 onTimeInputCounterSec =0;
+static  sint8 offTimeInputCounterSec =0;
+#endif 
 
 /**********************************************************************************************************************
  *  GLOBAL DATA
@@ -60,7 +75,7 @@ typedef enum{
  *  LOCAL FUNCTIONS
  *********************************************************************************************************************/
 static  void HandleUserInput( Dio_LevelType sw1Status,  Dio_LevelType sw2Status);
-static void    RunningStateHanlder(void);
+
 /**********************************************************************************************************************
  *  GLOBAL FUNCTIONS
  *********************************************************************************************************************/
@@ -91,7 +106,7 @@ main(void)
 {
     static Dio_LevelType sw1State = DIO_PIN_SNA;
     static Dio_LevelType sw2State = DIO_PIN_SNA;
-#if 1
+#if 0
 	  RCGCGPIO |= (1<<5);   /* Set bit5 of RCGCGPIO to enable clock to PORTF*/
     
 	 /* PORTF0 has special function, need to unlock to modify */
@@ -124,14 +139,16 @@ main(void)
     Gpt_Init(GptConfigPtr);
     IntCrtl_Init();
 #endif
-
+    	Gpt_StartTimer(GPT_TMR8,GPT_PREDEF_TIMER_1000MS_32BIT);
+		//	Gpt_StartTimer(GPT_TMR8,GPT_PREDEF_TIMER_1000MS_32BIT);
+		//	RunningStateHanlder();
 	while(1){
 
+	
+#if 0
         switch(stateMachine)
         {
             case CONFIG_MODE:
-
-
                 HandleUserInput(sw1State,sw2State);
 
             break;
@@ -142,6 +159,7 @@ main(void)
                 
 
         }
+#endif				
     }
 
 }
@@ -168,7 +186,7 @@ void Appl_SecStartUpConfig(void)
     }else
     {   
         stateMachine =RUNNING_MODE;
-        Gpt_StopTimer(GPT_TMR6);
+        Gpt_StopTimer(GPT_TMR8);
     }
 
 }
@@ -194,7 +212,7 @@ void Appl_SecTimerHanlder(void)
 
 
 
-    switch(RunningSubStates)
+    switch(RunningSubStates):
     {
         case ON_TIME:
             if (ontimeCalc>0)
@@ -204,7 +222,7 @@ void Appl_SecTimerHanlder(void)
             {
                 RunningSubStates = DIMMING_TIME;
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
-                Gpt_StopTimer(GPT_TMR8);
+       
                 onTimerControl =0;
             }
             
@@ -218,12 +236,13 @@ void Appl_SecTimerHanlder(void)
             }else
             {
                 RunningSubStates = ON_TIME;
-                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
-                Gpt_StopTimer(GPT_TMR8);
-                Gpt_StopTimer(GPT_TMR7);
+                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
+  
+               // Gpt_StopTimer(GPT_TMR7);
                 offTimerControl =0;
             }
-
+						
+            Appl_DimmingHanlder();
         break;
     }
 }
@@ -241,9 +260,14 @@ void Appl_SecTimerHanlder(void)
 * \Return value:   : None
 *******************************************************************************/
 
+	volatile uint32 ISRCount =0;
+    static uint8 prevState = 0;
 void Appl_DimmingHanlder(void)
 {
-    Dio_FlipChannel(PIN_LED1, PORT_LED1);    
+		//GPTMICR(GPT_TMR6) |= (1<<0) ;
+		ISRCount++;
+    Dio_FlipChannel(PIN_LED1, PORT_LED1);   
+		//Gpt_StartTimer(GPT_TMR7,GPT_PREDEF_TIMER_2000MS_32BIT);  
 }
 
 /******************************************************************************
@@ -257,7 +281,7 @@ void Appl_DimmingHanlder(void)
 * \Return value:   : None
 *******************************************************************************/
 
-static void    RunningStateHanlder(void)
+void RunningStateHanlder(void)
 {
         
     switch(RunningSubStates)
@@ -267,7 +291,7 @@ static void    RunningStateHanlder(void)
             if (onTimerControl ==0)
             {
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
-                Gpt_StartTimer(GPT_TMR8,GPT_PREDEF_TIMER_1000MS_32BIT);
+       //         Gpt_StartTimer(GPT_TMR7,GPT_PREDEF_TIMER_2000MS_32BIT);
                 ontimeCalc = onTimeInputCounterSec;
                 onTimerControl =0xFF;
             }
@@ -277,18 +301,19 @@ static void    RunningStateHanlder(void)
         case DIMMING_TIME:
             if (offTimerControl ==0)
             {
-                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
-                Gpt_StartTimer(GPT_TMR8,GPT_PREDEF_TIMER_1000MS_32BIT);
+                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
+     //         Gpt_StartTimer(GPT_TMR8,GPT_PREDEF_TIMER_1000MS_32BIT);
                 offtimeCalc = offTimeInputCounterSec;
                 offTimerControl =0xFF;
 
-                Gpt_StartTimer(GPT_TMR7,GPT_PREDEF_TIMER_100MS_32BIT);
+                
                 dimmingTimerControl =0xFF;
             }
-
+						
         break;
 
     }
+    Appl_SecTimerHanlder();
 }
 /******************************************************************************
 * \Syntax          : void HandleUserInput( Dio_LevelType sw1Status,  Dio_LevelType sw2Status)
@@ -303,6 +328,7 @@ static void    RunningStateHanlder(void)
 
 static void HandleUserInput( Dio_LevelType sw1Status,  Dio_LevelType sw2Status)
 {
+#ifndef USE_PRECONFIGURED_LIGHT_TIMING	
     static uint8 startTimerOnce =0;
     
     if (startTimerOnce ==0)
@@ -310,10 +336,7 @@ static void HandleUserInput( Dio_LevelType sw1Status,  Dio_LevelType sw2Status)
            Gpt_StartTimer(GPT_TMR6,GPT_PREDEF_TIMER_1000MS_32BIT);
            startTimerOnce =0xFF;
     }
-
-
-
-
+#endif
 }
 
 
@@ -321,7 +344,7 @@ static void HandleUserInput( Dio_LevelType sw1Status,  Dio_LevelType sw2Status)
 
 void GpioIsrHandler(void)
 {
-
+#ifndef USE_PRECONFIGURED_LIGHT_TIMING
     if(stateMachine ==CONFIG_MODE)
     {
         if (PORTF_ِAPB_GPIOMIS & (1<<PIN_SW1)) /* check if interrupt causes by PF4/SW1*/
@@ -335,6 +358,7 @@ void GpioIsrHandler(void)
             PORTF_ِAPB_GPIOICR |= (1<<PIN_SW2); 
         }
     }
+#endif	
 }
 /**********************************************************************************************************************
  *  END OF FILE: Main.c

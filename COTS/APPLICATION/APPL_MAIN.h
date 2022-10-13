@@ -18,6 +18,8 @@
 /**********************************************************************************************************************
  *  GLOBAL CONSTANT MACROS
  *********************************************************************************************************************/
+#define USE_PRECONFIGURED_LIGHT_TIMING	
+
 #define TIVAC_HAL_LED_RED       PORTF_PIN_1
 #define TIVAC_HAL_LED_BLUE      PORTF_PIN_2
 #define TIVAC_HAL_LED_GREEN     PORTF_PIN_3
@@ -51,6 +53,7 @@ void Appl_DimmingHanlder(void);
 void Appl_SecTimerHanlder(void);
 void Appl_SecStartUpConfig(void);
 void GpioIsrHandler(void);
+void RunningStateHanlder(void);
 #endif  /* APPL_MAIN_H */
 
 /**********************************************************************************************************************
