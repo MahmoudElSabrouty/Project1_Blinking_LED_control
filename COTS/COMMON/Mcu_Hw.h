@@ -141,7 +141,7 @@ typedef union
 #define APINT                               *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0xD0C))
 #define INTCTRL                             *((volatile INTCTRL_Tag*)(CORTEXM4_PERI_BASE_ADDRESS+0xD04))  /*DONE*/
 
-
+#define NVIC_EN0                            *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0x100))
 #define NVIC_EN1                            *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0x104))
 
 #define NVIC_EN2                            *((volatile uint32*)(CORTEXM4_PERI_BASE_ADDRESS+0x108))

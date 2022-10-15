@@ -159,7 +159,7 @@ void Gpt_Init(const Gpt_ConfigType * ConfigPtr)
             /*2. Write the GPTM Configuration Register (GPTMCFG) with a value of 0x0000.0000*/
             GPTMCFG(ConfigPtr[configuredPinIndex].channelId) =0x00000000;
 
-            (GPTMCFG((ConfigPtr[configuredPinIndex].channelId))) ^= GPTMCFG_TIMER_A_ONLY;  /*GPTMCFG - select TIMER A Only - Driver didn't support concatenated mode*/ 
+            (GPTMCFG((ConfigPtr[configuredPinIndex].channelId))) |= GPTMCFG_TIMER_A_ONLY;  /*GPTMCFG - select TIMER A Only - Driver didn't support concatenated mode*/ 
             Gpt_SetMode(ConfigPtr[configuredPinIndex].channelId, ConfigPtr[configuredPinIndex].gptChannelMode);
             Gpt_IntCtl(ConfigPtr[configuredPinIndex].channelId);
 
@@ -185,15 +185,15 @@ static void Gpt_SetMode(Gpt_ChannelType channelId, Gpt_ChannelModeType chaMode){
     switch(chaMode)
     {
         case GPT_CH_MODE_CONTINUOUS_COUNTUP: 
-            GPTMTAMR(channelId) ^= (GPTMCFG_TAMR_PERIODIC | GPTMCFG_TACDIR_COUNTUP);
+            GPTMTAMR(channelId) |= (GPTMCFG_TAMR_PERIODIC | GPTMCFG_TACDIR_COUNTUP);
         break;
 
         case GPT_CH_MODE_ONESHOT_COUNTUP: 
-            GPTMTAMR(channelId) ^= (GPTMCFG_TAMR_ONESHOT | GPTMCFG_TACDIR_COUNTUP);
+            GPTMTAMR(channelId) |= (GPTMCFG_TAMR_ONESHOT | GPTMCFG_TACDIR_COUNTUP);
         break;
 #ifdef GPT_PWM_ENABLE
         case GPT_CH_MODE_PWM_PERIODIC: 
-            GPTMTAMR(channelId) ^= (GPTMCFG_TAAMS_PWM_ENABLE | GPTMCFG_TAMR_PERIODIC | GPTMCFG_TAPWMIE_ENABLE);
+            GPTMTAMR(channelId) |= (GPTMCFG_TAAMS_PWM_ENABLE | GPTMCFG_TAMR_PERIODIC | GPTMCFG_TAPWMIE_ENABLE);
         break;
 #endif
 
@@ -216,7 +216,7 @@ static void Gpt_SetMode(Gpt_ChannelType channelId, Gpt_ChannelModeType chaMode){
 void Gpt_StartTimer(Gpt_ChannelType channelId, Gpt_ValueType TimerVale)
 {
     
-    GPTMCTL(channelId) ^= (GPTMCTL_TAEN); /*Enable Timer A interrupts */
+    GPTMCTL(channelId) |= (GPTMCTL_TAEN); /*Enable Timer A interrupts */
     
 } 
 /******************************************************************************
@@ -238,7 +238,23 @@ void Gpt_StopTimer(Gpt_ChannelType channelId)
  
 }; 
 
+/******************************************************************************
+* \Syntax          : void Gpt_ISRClear(Gpt_ChannelType channelId)                                      
+* \Description     : Clear  ISR Status register per channel                                     
+*                                                                             
+* \Sync\Async      : Synchronous                                               
+* \Reentrancy      : Non Reentrant                                             
+* \Parameters (in) : None                     
+* \Parameters (out): None                                                      
+* \Return value:   : None
+*******************************************************************************/
 
+void Gpt_ISRClear(Gpt_ChannelType channelId)
+{
+ 
+    	GPTMICR(channelId) |= (1<<0) ;
+ 
+}; 
 
 static void Gpt_IntCtl(Gpt_ChannelType channelId)
 {
@@ -248,15 +264,18 @@ static void Gpt_IntCtl(Gpt_ChannelType channelId)
          - GPTMIMR.TBTOIM-> Timer B time-out interrupt enable(1)
          - GPTMIMR.RTCIM -> Timer RTC time-out interrupt enable(1) */
 
-        GPTMIMR(channelId) ^= (GPTMIMR_TATOIM); /*Enable Timer A interrupts */
+        GPTMIMR(channelId) |= (GPTMIMR_TATOIM); /*Enable Timer A interrupts */
     
 }
 
 
 
+
 static void enableGptClkGating(const Gpt_ConfigType * ConfigPtr)
 {   
-    /*Question: why Setting the same bit again will clear it*/
+    /*Question: why Setting the same bit again will clear it
+        ANS: 	- TIMERn bit must be set in the RCGCTIMER or RCGCWTIMER 
+		        - the peripheral-specific registers must be accessed by read-modify-write operations */
     uint8 configuredChIndex     = 0;
     uint8 usedDriBitmap         = 0x00;
     uint8 usedWDriBitmap        = 0x00;
@@ -265,20 +284,21 @@ static void enableGptClkGating(const Gpt_ConfigType * ConfigPtr)
     {
         if((ConfigPtr[configuredChIndex].channelId) <= GPT_TMR5)
         {
-            usedDriBitmap ^= (1<< ConfigPtr[configuredChIndex].channelId);  
+            usedDriBitmap |= (1<< ConfigPtr[configuredChIndex].channelId);  
         } 
             else
         {
-            usedWDriBitmap ^= (1<< ((ConfigPtr[configuredChIndex].channelId)-(GPT_TMR6)));  
+            usedWDriBitmap |= (1<< ((ConfigPtr[configuredChIndex].channelId)-(GPT_TMR6)));  
         } 
 
     }
     
-    RCGCTIMER ^= (uint32)usedDriBitmap;  
+    RCGCTIMER |= (uint32)usedDriBitmap;  
     
-    RCGCWTIMER^= (uint32)usedWDriBitmap;   
+    RCGCWTIMER|= (uint32)usedWDriBitmap;   
+
     /*Timer Reset 
-    SRWTIMER  ^= (uint32)usedWDriBitmap;  
+    SRWTIMER  |= (uint32)usedWDriBitmap;  
 
     SRWTIMER  &= ~((uint32)usedWDriBitmap); Reset is completed by setting then resetting the corresponding Bits*/   
 
@@ -289,18 +309,18 @@ static void enableGptClkGating(const Gpt_ConfigType * ConfigPtr)
 
 /* Interrupt Handlers Implmentation*/
 
-void TIMER0A_Handler(void)		{if (gptCallbackNotifications[0 ] != NULL_PTR)	gptCallbackNotifications[0 ];}
-void TIMER1A_Handler(void)		{if (gptCallbackNotifications[1 ] != NULL_PTR)	gptCallbackNotifications[1 ];}
-void TIMER2A_Handler(void)		{if (gptCallbackNotifications[2 ] != NULL_PTR)	gptCallbackNotifications[2 ];}
-void TIMER3A_Handler(void)		{if (gptCallbackNotifications[3 ] != NULL_PTR)	gptCallbackNotifications[3 ];}
-void TIMER4A_Handler(void)		{if (gptCallbackNotifications[4 ] != NULL_PTR)	gptCallbackNotifications[4 ];}
-void TIMER5A_Handler(void)		{if (gptCallbackNotifications[5 ] != NULL_PTR)	gptCallbackNotifications[5 ];} 
-void WTIMER0A_Handler(void)	    {if (gptCallbackNotifications[6 ] != NULL_PTR)	gptCallbackNotifications[6 ];} 
-void WTIMER1A_Handler(void)	    {if (gptCallbackNotifications[7 ] != NULL_PTR)	gptCallbackNotifications[7 ];} 
-void WTIMER2A_Handler(void)	    {if (gptCallbackNotifications[8 ] != NULL_PTR)	gptCallbackNotifications[8 ];} 
-void WTIMER3A_Handler(void)	    {if (gptCallbackNotifications[9 ] != NULL_PTR)	gptCallbackNotifications[9 ];} 
-void WTIMER4A_Handler(void)	    {if (gptCallbackNotifications[10] != NULL_PTR)	gptCallbackNotifications[10];} 
-void WTIMER5A_Handler(void)	    {if (gptCallbackNotifications[11] != NULL_PTR)	gptCallbackNotifications[11];} 
+void TIMER0A_Handler(void)		  {if (gptCallbackNotifications[0 ] != NULL_PTR)	gptCallbackNotifications[0 ]();}
+void TIMER1A_Handler(void)		  {if (gptCallbackNotifications[1 ] != NULL_PTR)	gptCallbackNotifications[1 ]();}
+void TIMER2A_Handler(void)		  {if (gptCallbackNotifications[2 ] != NULL_PTR)	gptCallbackNotifications[2 ]();}
+void TIMER3A_Handler(void)		  {if (gptCallbackNotifications[3 ] != NULL_PTR)	gptCallbackNotifications[3 ]();}
+void TIMER4A_Handler(void)		  {if (gptCallbackNotifications[4 ] != NULL_PTR)	gptCallbackNotifications[4 ]();}
+void TIMER5A_Handler(void)		  {if (gptCallbackNotifications[5 ] != NULL_PTR)	gptCallbackNotifications[5 ]();} 
+void WTIMER0A_Handler(void)	    {if (gptCallbackNotifications[6 ] != NULL_PTR)	gptCallbackNotifications[6 ]();} 
+void WTIMER1A_Handler(void)	    {if (gptCallbackNotifications[7 ] != NULL_PTR)	gptCallbackNotifications[7 ]();} 
+void WTIMER2A_Handler(void)	    {if (gptCallbackNotifications[8 ] != NULL_PTR)	gptCallbackNotifications[8 ]();} 
+void WTIMER3A_Handler(void)	    {if (gptCallbackNotifications[9 ] != NULL_PTR)	gptCallbackNotifications[9 ]();} 
+void WTIMER4A_Handler(void)	    {if (gptCallbackNotifications[10] != NULL_PTR)	gptCallbackNotifications[10]();} 
+void WTIMER5A_Handler(void)	    {if (gptCallbackNotifications[11] != NULL_PTR)	gptCallbackNotifications[11]();} 
 
 
 

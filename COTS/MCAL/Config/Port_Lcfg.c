@@ -38,6 +38,7 @@ const Port_ConfigType PortConfigPtr[PORT_MAX_PIN_NO] =
         PIN_IN,         /* pinDir of Type Port_PinDirectionType             */
         PIN_GPIO,       /* PortPinMode of Type Port_PinModeType             */
         PULL_DOWN,      /* pinIntAttach of Type Port_PinInternalAttachType  */
+        ENABLED,        /* pinInterruptEnable of type Port_PinInterruptEnable*/    
        
     },
     {
@@ -47,7 +48,7 @@ const Port_ConfigType PortConfigPtr[PORT_MAX_PIN_NO] =
         PIN_IN,         /* pinDir of Type Port_PinDirectionType             */
         PIN_GPIO,       /* PortPinMode of Type Port_PinModeType             */
         PULL_DOWN,      /* pinIntAttach of Type Port_PinInternalAttachType  */
-        
+        ENABLED,        /* pinInterruptEnable of type Port_PinInterruptEnable*/            
     },
 		{
         PORT_LED1,       /* PortName of type PORT_PortName                   */
@@ -56,7 +57,7 @@ const Port_ConfigType PortConfigPtr[PORT_MAX_PIN_NO] =
         PIN_OUT,        /* pinDir of Type Port_PinDirectionType             */
         PIN_GPIO,       /* PortPinMode of Type Port_PinModeType             */
         PULL_DOWN,     /* pinIntAttach of Type Port_PinInternalAttachType  */
-        
+        DISABLED,        /* pinInterruptEnable of type Port_PinInterruptEnable*/    
     }
 };
 

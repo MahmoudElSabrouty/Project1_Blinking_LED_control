@@ -58,7 +58,7 @@
 
 Dio_LevelType Dio_ReadChannel(Dio_ChannelType channelId, Dio_PortType portName);
 void Dio_WriteChannel(Dio_ChannelType channelId, Dio_PortType portName, Dio_LevelType level);
-
+void Dio_ISR_Clear(Dio_ChannelType channelId, Dio_PortType portName);
 Dio_PortLevelType Dio_ReadPort( Dio_PortType portName,Dio_PortLevelType portMask);
 void Dio_WritePort(Dio_PortType portName, Dio_PortLevelType portMask, Dio_PortLevelType maskValue); 
 

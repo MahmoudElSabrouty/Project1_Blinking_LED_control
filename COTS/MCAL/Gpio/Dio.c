@@ -14,7 +14,7 @@
  *********************************************************************************************************************/
 #include "Std_Types.h"
 #include "Dio.h"
-
+#include "Port_Cfg.h"
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
 *********************************************************************************************************************/	
@@ -81,7 +81,7 @@ void Dio_WriteChannel(Dio_ChannelType channelId, Dio_PortType portName, Dio_Leve
 {
     if (level == DIO_PIN_HIGH)
     {
-        PORTX_ِAPB_GPIODATA_MASK(portName, (1<<channelId)) ^= ((uint32)((uint32) (1<<channelId)));
+        PORTX_ِAPB_GPIODATA_MASK(portName, (1<<channelId)) |= ((uint32)((uint32) (1<<channelId)));
     }
     else
     {
@@ -135,7 +135,11 @@ Dio_PortLevelType Dio_ReadPort( Dio_PortType portName,Dio_PortLevelType portMask
 
 }
 
-
+void Dio_ISR_Clear(Dio_ChannelType channelId, Dio_PortType portName)
+{
+    
+    PORTX_ِAPB_GPIOICR(portName) |= (uint32)(1<<channelId);
+}
 
 /******************************************************************************
 * \Syntax          : void Dio_FlipChannel(Dio_ChannelType channelId, Dio_PortType portName)
@@ -152,6 +156,13 @@ Dio_PortLevelType Dio_ReadPort( Dio_PortType portName,Dio_PortLevelType portMask
 void Dio_FlipChannel(Dio_ChannelType channelId, Dio_PortType portName)
 {
      PORTX_ِAPB_GPIODATA_MASK(portName, (1<<channelId)) ^= (1<<channelId);
+}
+
+
+
+void GPIOF_Handler(void)
+{
+    GpioIsrHandler();
 }
 
 

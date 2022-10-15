@@ -92,6 +92,8 @@ void Gpt_StopTimer(Gpt_ChannelType channelId);
 *******************************************************************************/
 
 void Gpt_StartTimer(Gpt_ChannelType channelId, Gpt_ValueType TimerVale);
+
+void Gpt_ISRClear(Gpt_ChannelType channelId);
 #endif  /* GPT_H */
 
 /**********************************************************************************************************************

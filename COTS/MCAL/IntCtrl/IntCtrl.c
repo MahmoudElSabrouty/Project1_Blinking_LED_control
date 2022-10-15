@@ -57,10 +57,10 @@ void IntCrtl_Init(void)
 
     /*Keep default priority*/
     /*Enable required GPT interrupts*/
-    
-    NVIC_EN1 ^= 0x40000000;   /*IQR 94 - WTIMER0A_Handler*/   
-    NVIC_EN2 ^= 0x02;         /*IQR 96 - WTIMER1A_Handler*/
-    NVIC_EN3 ^= 0x04;         /*IQR 98 - WTIMER2A_Handler*/
+    NVIC_EN0 |= (1<<30);      /*IQR 30 - Enable PORTF Interrupt */
+    NVIC_EN2 |= (1<<30);   /*IQR 94 - WTIMER0A_Handler - 0x000001B8*/   
+    NVIC_EN3 |= (1<<0);         /*IQR 96 - WTIMER1A_Handler - 0x000001C0*/
+    NVIC_EN3 |= (1<<2);         /*IQR 98 - WTIMER2A_Handler - 0x000001C8*/
     __enable_irq(); /* global enable IRQs */
 
     

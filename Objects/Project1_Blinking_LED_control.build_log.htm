@@ -21,34 +21,12 @@ Target DLL:      lmidk-agdi.dll V???
 Dialog DLL:      TCM.DLL V1.56.1.0
  
 <h2>Project:</h2>
-D:\MF\Personal\Intellectual\Embedded_SW\EgFWD\Advanced Embedded Systems\Exercise\Project1_Blinking_LED_control\Project1_Blinking_LED_control.uvprojx
-Project File Date:  08/03/2022
+D:\MF\Personal\Intellectual\Embedded_SW\EgFWD\Advanced Embedded Systems\Exercise\Project1_Blinking_LED_control_Delivery_main\Project1_Blinking_LED_control\Project1_Blinking_LED_control.uvprojx
+Project File Date:  10/15/2022
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.18', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'Target 1'
-COTS/MCAL/IntCtrl/IntCtrl.c(64): warning: implicit declaration of function '__enable_irq' [-Wimplicit-function-declaration]
-    __enable_irq(); /* global enable IRQs */
-    ^
-1 warning generated.
-compiling IntCtrl.c...
-COTS/MCAL/Gpio/Port.c(16): warning: In file included from...
-./COTS/MCAL/Include\Port.h(18): warning: In file included from...
-./COTS/MCAL/Include/Port_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    CH8,
-       ^
-./COTS/MCAL/Include/Port_Types.h(66): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    PIN_GPIO =0,  /*By Default GPIO*/
-               ^~
-COTS/MCAL/Gpio/Port.c(82): warning: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Wextra-semi-stmt]
-        /*Do Nothing for Alternate Function - default Mode is GPIO*/;
-                                                                    ^
-COTS/MCAL/Gpio/Port.c(57): warning: unused function 'unlockPort' [-Wunused-function]
-static void unlockPort(PORT_PortName portName)
-            ^
-4 warnings generated.
-compiling Port.c...
-compiling IntCtrl_Lcfg.c...
 COTS/MCAL/Config/Port_Lcfg.c(16): warning: In file included from...
 ./COTS/HAL\Port_Cfg.h(17): warning: In file included from...
 ./COTS/MCAL/Include\Port_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
@@ -57,14 +35,23 @@ COTS/MCAL/Config/Port_Lcfg.c(16): warning: In file included from...
 ./COTS/MCAL/Include\Port_Types.h(66): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
     PIN_GPIO =0,  /*By Default GPIO*/
                ^~
+./COTS/MCAL/Include\Port_Types.h(78): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    ENABLED,
+           ^
 COTS/MCAL/Config/Port_Lcfg.c(31): warning: no previous extern declaration for non-static variable 'PortConfigPtr' [-Wmissing-variable-declarations]
 const Port_ConfigType PortConfigPtr[PORT_MAX_PIN_NO] = 
                       ^
 COTS/MCAL/Config/Port_Lcfg.c(31): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 const Port_ConfigType PortConfigPtr[PORT_MAX_PIN_NO] = 
       ^
-3 warnings generated.
+4 warnings generated.
 compiling Port_Lcfg.c...
+compiling IntCtrl_Lcfg.c...
+COTS/MCAL/IntCtrl/IntCtrl.c(64): warning: implicit declaration of function '__enable_irq' [-Wimplicit-function-declaration]
+    __enable_irq(); /* global enable IRQs */
+    ^
+1 warning generated.
+compiling IntCtrl.c...
 COTS/MCAL/Gpio/Dio.c(16): warning: In file included from...
 ./COTS/MCAL/Include\Dio.h(19): warning: In file included from...
 ./COTS/MCAL/Include/Dio_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
@@ -73,29 +60,219 @@ COTS/MCAL/Gpio/Dio.c(16): warning: In file included from...
 ./COTS/MCAL/Include/Dio_Types.h(57): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
     DIO_PIN_SNA =0xFF,
                      ^
+COTS/MCAL/Gpio/Dio.c(17): warning: In file included from...
+./COTS/HAL\Port_Cfg.h(17): warning: In file included from...
+./COTS/MCAL/Include\Port_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    CH8,
+       ^
+./COTS/MCAL/Include\Port_Types.h(66): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    PIN_GPIO =0,  /*By Default GPIO*/
+               ^~
+./COTS/MCAL/Include\Port_Types.h(78): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    ENABLED,
+           ^
 COTS/MCAL/Gpio/Dio.c(109): warning: // comments are not allowed in this language [-Wcomment]
     //TempRegVar = &( PORTX_ِAPB_GPIODATA_MASK(portName, portMask));
     ^
+COTS/MCAL/Gpio/Dio.c(165): warning: implicit declaration of function 'GpioIsrHandler' [-Wimplicit-function-declaration]
+    GpioIsrHandler();
+    ^
+COTS/MCAL/Gpio/Dio.c(163): warning: no previous prototype for function 'GPIOF_Handler' [-Wmissing-prototypes]
+void GPIOF_Handler(void)
+     ^
+COTS/MCAL/Gpio/Dio.c(163): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void GPIOF_Handler(void)
+^
+static 
 COTS/MCAL/Gpio/Dio.c(29): warning: no previous extern declaration for non-static variable 'TempRegVar' [-Wmissing-variable-declarations]
 volatile uint32* TempRegVar;
                  ^
 COTS/MCAL/Gpio/Dio.c(29): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 volatile uint32* TempRegVar;
          ^
-4 warnings generated.
+9 warnings generated.
 compiling Dio.c...
+COTS/MCAL/Gpio/Port.c(16): warning: In file included from...
+./COTS/MCAL/Include\Port.h(18): warning: In file included from...
+./COTS/MCAL/Include/Port_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    CH8,
+       ^
+./COTS/MCAL/Include/Port_Types.h(66): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    PIN_GPIO =0,  /*By Default GPIO*/
+               ^~
+./COTS/MCAL/Include/Port_Types.h(78): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    ENABLED,
+           ^
+COTS/MCAL/Gpio/Port.c(96): warning: empty expression statement has no effect; remove unnecessary ';' to silence this warning [-Wextra-semi-stmt]
+        /*Do Nothing for Alternate Function - default Mode is GPIO*/;
+                                                                    ^
+COTS/MCAL/Gpio/Port.c(71): warning: unused function 'unlockPort' [-Wunused-function]
+static void unlockPort(PORT_PortName portName)
+            ^
+5 warnings generated.
+compiling Port.c...
+COTS/APPLICATION/main.c(16): warning: In file included from...
+./COTS/MCAL/Include\Gpt.h(19): warning: In file included from...
+./COTS/MCAL/Include/Gpt_Types.h(46): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+        GPT_TMR11   ,      /*32/64-bit Wide Timer 5 base: 0x4004.F000           */   
+                    ^~
+./COTS/MCAL/Include/Gpt_Types.h(62): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    GPT_CH_MODE_ONESHOT_COUNTUP,
+                               ^
+./COTS/MCAL/Include/Gpt_Types.h(75): warning: padding struct 'Gpt_ConfigType' with 2 bytes to align 'gptPredefinedValue' [-Wpadded]
+    Gpt_PredefTimerType gptPredefinedValue;
+                        ^
+COTS/APPLICATION/main.c(17): warning: In file included from...
+./COTS/MCAL/Include\Port.h(18): warning: In file included from...
+./COTS/MCAL/Include/Port_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    CH8,
+       ^
+./COTS/MCAL/Include/Port_Types.h(66): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    PIN_GPIO =0,  /*By Default GPIO*/
+               ^~
+./COTS/MCAL/Include/Port_Types.h(78): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    ENABLED,
+           ^
+COTS/APPLICATION/main.c(18): warning: In file included from...
+./COTS/MCAL/Include\Dio.h(19): warning: In file included from...
+./COTS/MCAL/Include/Dio_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    DIO_CH8,
+           ^
+./COTS/MCAL/Include/Dio_Types.h(57): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    DIO_PIN_SNA =0xFF,
+                     ^
+COTS/APPLICATION/main.c(19): warning: In file included from...
+./COTS/APPLICATION/APPL_MAIN.h(8): warning: '/*' within block comment [-Wcomment]
+ *  Description:  /* Board Support Package for the EK-TM4C123GXL board */    
+                  ^
+COTS/APPLICATION/main.c(32): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    RUNNING_MODE,
+                ^
+COTS/APPLICATION/main.c(37): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+    DIMMING_TIME,
+                ^
+COTS/APPLICATION/main.c(100): warning: implicit declaration of function 'IntCrtl_Init' [-Wimplicit-function-declaration]
+    IntCrtl_Init();
+    ^
+COTS/APPLICATION/main.c(109): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
+                sw1State = Dio_ReadChannel(PIN_SW1, PORT_SW1);
+                           ~~~~~~~~~~~~~~~          ^~~~~~~~
+./COTS/HAL\Port_Cfg.h(31): note: expanded from macro 'PORT_SW1'
+#define PORT_SW1                PORTF
+                                ^~~~~
+COTS/APPLICATION/main.c(109): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
+                sw1State = Dio_ReadChannel(PIN_SW1, PORT_SW1);
+                           ~~~~~~~~~~~~~~~ ^~~~~~~
+./COTS/HAL\Port_Cfg.h(32): note: expanded from macro 'PIN_SW1'
+#define PIN_SW1                 CH4
+                                ^~~
+COTS/APPLICATION/main.c(110): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
+                sw2State = Dio_ReadChannel(PIN_SW2, PORT_SW2);
+                           ~~~~~~~~~~~~~~~          ^~~~~~~~
+./COTS/HAL\Port_Cfg.h(34): note: expanded from macro 'PORT_SW2'
+#define PORT_SW2                PORTF
+                                ^~~~~
+COTS/APPLICATION/main.c(110): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
+                sw2State = Dio_ReadChannel(PIN_SW2, PORT_SW2);
+                           ~~~~~~~~~~~~~~~ ^~~~~~~
+./COTS/HAL\Port_Cfg.h(35): note: expanded from macro 'PIN_SW2'
+#define PIN_SW2                 CH0                
+                                ^~~
+COTS/APPLICATION/main.c(182): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
+                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
+                ~~~~~~~~~~~~~~~~           ^~~~~~~~~
+./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
+#define PORT_LED1               PORTF
+                                ^~~~~
+COTS/APPLICATION/main.c(182): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
+                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
+                ~~~~~~~~~~~~~~~~ ^~~~~~~~
+./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
+#define PIN_LED1                CH1
+                                ^~~
+COTS/APPLICATION/main.c(197): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
+                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
+                ~~~~~~~~~~~~~~~~           ^~~~~~~~~
+./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
+#define PORT_LED1               PORTF
+                                ^~~~~
+COTS/APPLICATION/main.c(197): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
+                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
+                ~~~~~~~~~~~~~~~~ ^~~~~~~~
+./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
+#define PIN_LED1                CH1
+                                ^~~
+COTS/APPLICATION/main.c(223): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
+    Dio_FlipChannel(PIN_LED1, PORT_LED1);    
+    ~~~~~~~~~~~~~~~           ^~~~~~~~~
+./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
+#define PORT_LED1               PORTF
+                                ^~~~~
+COTS/APPLICATION/main.c(223): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
+    Dio_FlipChannel(PIN_LED1, PORT_LED1);    
+    ~~~~~~~~~~~~~~~ ^~~~~~~~
+./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
+#define PIN_LED1                CH1
+                                ^~~
+COTS/APPLICATION/main.c(246): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
+                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
+                ~~~~~~~~~~~~~~~~           ^~~~~~~~~
+./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
+#define PORT_LED1               PORTF
+                                ^~~~~
+COTS/APPLICATION/main.c(246): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
+                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
+                ~~~~~~~~~~~~~~~~ ^~~~~~~~
+./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
+#define PIN_LED1                CH1
+                                ^~~
+COTS/APPLICATION/main.c(251): warning: // comments are not allowed in this language [-Wcomment]
+                //ontimeCalc = onTimeInputCounterSec;
+                ^
+COTS/APPLICATION/main.c(260): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
+                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
+                ~~~~~~~~~~~~~~~~           ^~~~~~~~~
+./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
+#define PORT_LED1               PORTF
+                                ^~~~~
+COTS/APPLICATION/main.c(260): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
+                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
+                ~~~~~~~~~~~~~~~~ ^~~~~~~~
+./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
+#define PIN_LED1                CH1
+                                ^~~
+COTS/APPLICATION/main.c(291): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
+    Dio_ISR_Clear(PIN_LED1, PORT_LED1);
+    ~~~~~~~~~~~~~           ^~~~~~~~~
+./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
+#define PORT_LED1               PORTF
+                                ^~~~~
+COTS/APPLICATION/main.c(291): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
+    Dio_ISR_Clear(PIN_LED1, PORT_LED1);
+    ~~~~~~~~~~~~~ ^~~~~~~~
+./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
+#define PIN_LED1                CH1
+                                ^~~
+COTS/APPLICATION/main.c(289): warning: unused variable 'iter' [-Wunused-variable]
+    uint8 iter = 100;
+          ^
+COTS/APPLICATION/main.c(286): warning: unused parameter 'sw1Status' [-Wunused-parameter]
+static void HandleUserInput( Dio_LevelType sw1Status,  Dio_LevelType sw2Status)
+                                           ^
+COTS/APPLICATION/main.c(286): warning: unused parameter 'sw2Status' [-Wunused-parameter]
+static void HandleUserInput( Dio_LevelType sw1Status,  Dio_LevelType sw2Status)
+                                                                     ^
+32 warnings generated.
+compiling main.c...
 COTS/MCAL/Gpt/Gpt.c(16): warning: In file included from...
 ./COTS/MCAL/Include\Gpt.h(19): warning: In file included from...
 ./COTS/MCAL/Include/Gpt_Types.h(46): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
         GPT_TMR11   ,      /*32/64-bit Wide Timer 5 base: 0x4004.F000           */   
                     ^~
-./COTS/MCAL/Include/Gpt_Types.h(53): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    GPT_PREDEF_TIMER_1000MS_32BIT = 16000000,
-                                            ^
-./COTS/MCAL/Include/Gpt_Types.h(59): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+./COTS/MCAL/Include/Gpt_Types.h(62): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
     GPT_CH_MODE_ONESHOT_COUNTUP,
                                ^
-./COTS/MCAL/Include/Gpt_Types.h(72): warning: padding struct 'Gpt_ConfigType' with 2 bytes to align 'gptPredefinedValue' [-Wpadded]
+./COTS/MCAL/Include/Gpt_Types.h(75): warning: padding struct 'Gpt_ConfigType' with 2 bytes to align 'gptPredefinedValue' [-Wpadded]
     Gpt_PredefTimerType gptPredefinedValue;
                         ^
 COTS/MCAL/Gpt/Gpt.c(46): warning: // comments are not allowed in this language [-Wcomment]
@@ -127,275 +304,110 @@ void Gpt_StartTimer(Gpt_ChannelType channelId, Gpt_ValueType TimerVale)
 COTS/MCAL/Gpt/Gpt.c(239): warning: extra ';' outside of a function [-Wextra-semi]
 }; 
  ^~
-COTS/MCAL/Gpt/Gpt.c(292): warning: no previous prototype for function 'TIMER0A_Handler' [-Wmissing-prototypes]
-void TIMER0A_Handler(void)              {if (gptCallbackNotifications[0 ] != NULL_PTR)  gptCallbackNotifications[0 ];}
+COTS/MCAL/Gpt/Gpt.c(257): warning: extra ';' outside of a function [-Wextra-semi]
+}; 
+ ^~
+COTS/MCAL/Gpt/Gpt.c(312): warning: no previous prototype for function 'TIMER0A_Handler' [-Wmissing-prototypes]
+void TIMER0A_Handler(void)                {if (gptCallbackNotifications[0 ] != NULL_PTR)        gptCallbackNotifications[0 ]();}
      ^
-COTS/MCAL/Gpt/Gpt.c(292): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void TIMER0A_Handler(void)              {if (gptCallbackNotifications[0 ] != NULL_PTR)  gptCallbackNotifications[0 ];}
+COTS/MCAL/Gpt/Gpt.c(312): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void TIMER0A_Handler(void)                {if (gptCallbackNotifications[0 ] != NULL_PTR)        gptCallbackNotifications[0 ]();}
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(292): warning: expression result unused [-Wunused-value]
-void TIMER0A_Handler(void)              {if (gptCallbackNotifications[0 ] != NULL_PTR)  gptCallbackNotifications[0 ];}
-                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(293): warning: no previous prototype for function 'TIMER1A_Handler' [-Wmissing-prototypes]
-void TIMER1A_Handler(void)              {if (gptCallbackNotifications[1 ] != NULL_PTR)  gptCallbackNotifications[1 ];}
+COTS/MCAL/Gpt/Gpt.c(313): warning: no previous prototype for function 'TIMER1A_Handler' [-Wmissing-prototypes]
+void TIMER1A_Handler(void)                {if (gptCallbackNotifications[1 ] != NULL_PTR)        gptCallbackNotifications[1 ]();}
      ^
-COTS/MCAL/Gpt/Gpt.c(293): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void TIMER1A_Handler(void)              {if (gptCallbackNotifications[1 ] != NULL_PTR)  gptCallbackNotifications[1 ];}
+COTS/MCAL/Gpt/Gpt.c(313): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void TIMER1A_Handler(void)                {if (gptCallbackNotifications[1 ] != NULL_PTR)        gptCallbackNotifications[1 ]();}
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(293): warning: expression result unused [-Wunused-value]
-void TIMER1A_Handler(void)              {if (gptCallbackNotifications[1 ] != NULL_PTR)  gptCallbackNotifications[1 ];}
-                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(294): warning: no previous prototype for function 'TIMER2A_Handler' [-Wmissing-prototypes]
-void TIMER2A_Handler(void)              {if (gptCallbackNotifications[2 ] != NULL_PTR)  gptCallbackNotifications[2 ];}
+COTS/MCAL/Gpt/Gpt.c(314): warning: no previous prototype for function 'TIMER2A_Handler' [-Wmissing-prototypes]
+void TIMER2A_Handler(void)                {if (gptCallbackNotifications[2 ] != NULL_PTR)        gptCallbackNotifications[2 ]();}
      ^
-COTS/MCAL/Gpt/Gpt.c(294): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void TIMER2A_Handler(void)              {if (gptCallbackNotifications[2 ] != NULL_PTR)  gptCallbackNotifications[2 ];}
+COTS/MCAL/Gpt/Gpt.c(314): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void TIMER2A_Handler(void)                {if (gptCallbackNotifications[2 ] != NULL_PTR)        gptCallbackNotifications[2 ]();}
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(294): warning: expression result unused [-Wunused-value]
-void TIMER2A_Handler(void)              {if (gptCallbackNotifications[2 ] != NULL_PTR)  gptCallbackNotifications[2 ];}
-                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(295): warning: no previous prototype for function 'TIMER3A_Handler' [-Wmissing-prototypes]
-void TIMER3A_Handler(void)              {if (gptCallbackNotifications[3 ] != NULL_PTR)  gptCallbackNotifications[3 ];}
+COTS/MCAL/Gpt/Gpt.c(315): warning: no previous prototype for function 'TIMER3A_Handler' [-Wmissing-prototypes]
+void TIMER3A_Handler(void)                {if (gptCallbackNotifications[3 ] != NULL_PTR)        gptCallbackNotifications[3 ]();}
      ^
-COTS/MCAL/Gpt/Gpt.c(295): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void TIMER3A_Handler(void)              {if (gptCallbackNotifications[3 ] != NULL_PTR)  gptCallbackNotifications[3 ];}
+COTS/MCAL/Gpt/Gpt.c(315): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void TIMER3A_Handler(void)                {if (gptCallbackNotifications[3 ] != NULL_PTR)        gptCallbackNotifications[3 ]();}
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(295): warning: expression result unused [-Wunused-value]
-void TIMER3A_Handler(void)              {if (gptCallbackNotifications[3 ] != NULL_PTR)  gptCallbackNotifications[3 ];}
-                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(296): warning: no previous prototype for function 'TIMER4A_Handler' [-Wmissing-prototypes]
-void TIMER4A_Handler(void)              {if (gptCallbackNotifications[4 ] != NULL_PTR)  gptCallbackNotifications[4 ];}
+COTS/MCAL/Gpt/Gpt.c(316): warning: no previous prototype for function 'TIMER4A_Handler' [-Wmissing-prototypes]
+void TIMER4A_Handler(void)                {if (gptCallbackNotifications[4 ] != NULL_PTR)        gptCallbackNotifications[4 ]();}
      ^
-COTS/MCAL/Gpt/Gpt.c(296): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void TIMER4A_Handler(void)              {if (gptCallbackNotifications[4 ] != NULL_PTR)  gptCallbackNotifications[4 ];}
+COTS/MCAL/Gpt/Gpt.c(316): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void TIMER4A_Handler(void)                {if (gptCallbackNotifications[4 ] != NULL_PTR)        gptCallbackNotifications[4 ]();}
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(296): warning: expression result unused [-Wunused-value]
-void TIMER4A_Handler(void)              {if (gptCallbackNotifications[4 ] != NULL_PTR)  gptCallbackNotifications[4 ];}
-                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(297): warning: no previous prototype for function 'TIMER5A_Handler' [-Wmissing-prototypes]
-void TIMER5A_Handler(void)              {if (gptCallbackNotifications[5 ] != NULL_PTR)  gptCallbackNotifications[5 ];} 
+COTS/MCAL/Gpt/Gpt.c(317): warning: no previous prototype for function 'TIMER5A_Handler' [-Wmissing-prototypes]
+void TIMER5A_Handler(void)                {if (gptCallbackNotifications[5 ] != NULL_PTR)        gptCallbackNotifications[5 ]();} 
      ^
-COTS/MCAL/Gpt/Gpt.c(297): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void TIMER5A_Handler(void)              {if (gptCallbackNotifications[5 ] != NULL_PTR)  gptCallbackNotifications[5 ];} 
+COTS/MCAL/Gpt/Gpt.c(317): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void TIMER5A_Handler(void)                {if (gptCallbackNotifications[5 ] != NULL_PTR)        gptCallbackNotifications[5 ]();} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(297): warning: expression result unused [-Wunused-value]
-void TIMER5A_Handler(void)              {if (gptCallbackNotifications[5 ] != NULL_PTR)  gptCallbackNotifications[5 ];} 
-                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(298): warning: no previous prototype for function 'WTIMER0A_Handler' [-Wmissing-prototypes]
-void WTIMER0A_Handler(void)         {if (gptCallbackNotifications[6 ] != NULL_PTR)      gptCallbackNotifications[6 ];} 
+COTS/MCAL/Gpt/Gpt.c(318): warning: no previous prototype for function 'WTIMER0A_Handler' [-Wmissing-prototypes]
+void WTIMER0A_Handler(void)         {if (gptCallbackNotifications[6 ] != NULL_PTR)      gptCallbackNotifications[6 ]();} 
      ^
-COTS/MCAL/Gpt/Gpt.c(298): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void WTIMER0A_Handler(void)         {if (gptCallbackNotifications[6 ] != NULL_PTR)      gptCallbackNotifications[6 ];} 
+COTS/MCAL/Gpt/Gpt.c(318): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void WTIMER0A_Handler(void)         {if (gptCallbackNotifications[6 ] != NULL_PTR)      gptCallbackNotifications[6 ]();} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(298): warning: expression result unused [-Wunused-value]
-void WTIMER0A_Handler(void)         {if (gptCallbackNotifications[6 ] != NULL_PTR)      gptCallbackNotifications[6 ];} 
-                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(299): warning: no previous prototype for function 'WTIMER1A_Handler' [-Wmissing-prototypes]
-void WTIMER1A_Handler(void)         {if (gptCallbackNotifications[7 ] != NULL_PTR)      gptCallbackNotifications[7 ];} 
+COTS/MCAL/Gpt/Gpt.c(319): warning: no previous prototype for function 'WTIMER1A_Handler' [-Wmissing-prototypes]
+void WTIMER1A_Handler(void)         {if (gptCallbackNotifications[7 ] != NULL_PTR)      gptCallbackNotifications[7 ]();} 
      ^
-COTS/MCAL/Gpt/Gpt.c(299): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void WTIMER1A_Handler(void)         {if (gptCallbackNotifications[7 ] != NULL_PTR)      gptCallbackNotifications[7 ];} 
+COTS/MCAL/Gpt/Gpt.c(319): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void WTIMER1A_Handler(void)         {if (gptCallbackNotifications[7 ] != NULL_PTR)      gptCallbackNotifications[7 ]();} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(299): warning: expression result unused [-Wunused-value]
-void WTIMER1A_Handler(void)         {if (gptCallbackNotifications[7 ] != NULL_PTR)      gptCallbackNotifications[7 ];} 
-                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(300): warning: no previous prototype for function 'WTIMER2A_Handler' [-Wmissing-prototypes]
-void WTIMER2A_Handler(void)         {if (gptCallbackNotifications[8 ] != NULL_PTR)      gptCallbackNotifications[8 ];} 
+COTS/MCAL/Gpt/Gpt.c(320): warning: no previous prototype for function 'WTIMER2A_Handler' [-Wmissing-prototypes]
+void WTIMER2A_Handler(void)         {if (gptCallbackNotifications[8 ] != NULL_PTR)      gptCallbackNotifications[8 ]();} 
      ^
-COTS/MCAL/Gpt/Gpt.c(300): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void WTIMER2A_Handler(void)         {if (gptCallbackNotifications[8 ] != NULL_PTR)      gptCallbackNotifications[8 ];} 
+COTS/MCAL/Gpt/Gpt.c(320): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void WTIMER2A_Handler(void)         {if (gptCallbackNotifications[8 ] != NULL_PTR)      gptCallbackNotifications[8 ]();} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(300): warning: expression result unused [-Wunused-value]
-void WTIMER2A_Handler(void)         {if (gptCallbackNotifications[8 ] != NULL_PTR)      gptCallbackNotifications[8 ];} 
-                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(301): warning: no previous prototype for function 'WTIMER3A_Handler' [-Wmissing-prototypes]
-void WTIMER3A_Handler(void)         {if (gptCallbackNotifications[9 ] != NULL_PTR)      gptCallbackNotifications[9 ];} 
+COTS/MCAL/Gpt/Gpt.c(321): warning: no previous prototype for function 'WTIMER3A_Handler' [-Wmissing-prototypes]
+void WTIMER3A_Handler(void)         {if (gptCallbackNotifications[9 ] != NULL_PTR)      gptCallbackNotifications[9 ]();} 
      ^
-COTS/MCAL/Gpt/Gpt.c(301): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void WTIMER3A_Handler(void)         {if (gptCallbackNotifications[9 ] != NULL_PTR)      gptCallbackNotifications[9 ];} 
+COTS/MCAL/Gpt/Gpt.c(321): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void WTIMER3A_Handler(void)         {if (gptCallbackNotifications[9 ] != NULL_PTR)      gptCallbackNotifications[9 ]();} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(301): warning: expression result unused [-Wunused-value]
-void WTIMER3A_Handler(void)         {if (gptCallbackNotifications[9 ] != NULL_PTR)      gptCallbackNotifications[9 ];} 
-                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~ ~ ^
-COTS/MCAL/Gpt/Gpt.c(302): warning: no previous prototype for function 'WTIMER4A_Handler' [-Wmissing-prototypes]
-void WTIMER4A_Handler(void)         {if (gptCallbackNotifications[10] != NULL_PTR)      gptCallbackNotifications[10];} 
+COTS/MCAL/Gpt/Gpt.c(322): warning: no previous prototype for function 'WTIMER4A_Handler' [-Wmissing-prototypes]
+void WTIMER4A_Handler(void)         {if (gptCallbackNotifications[10] != NULL_PTR)      gptCallbackNotifications[10]();} 
      ^
-COTS/MCAL/Gpt/Gpt.c(302): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void WTIMER4A_Handler(void)         {if (gptCallbackNotifications[10] != NULL_PTR)      gptCallbackNotifications[10];} 
+COTS/MCAL/Gpt/Gpt.c(322): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void WTIMER4A_Handler(void)         {if (gptCallbackNotifications[10] != NULL_PTR)      gptCallbackNotifications[10]();} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(302): warning: expression result unused [-Wunused-value]
-void WTIMER4A_Handler(void)         {if (gptCallbackNotifications[10] != NULL_PTR)      gptCallbackNotifications[10];} 
-                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~ ~~^
-COTS/MCAL/Gpt/Gpt.c(303): warning: no previous prototype for function 'WTIMER5A_Handler' [-Wmissing-prototypes]
-void WTIMER5A_Handler(void)         {if (gptCallbackNotifications[11] != NULL_PTR)      gptCallbackNotifications[11];} 
+COTS/MCAL/Gpt/Gpt.c(323): warning: no previous prototype for function 'WTIMER5A_Handler' [-Wmissing-prototypes]
+void WTIMER5A_Handler(void)         {if (gptCallbackNotifications[11] != NULL_PTR)      gptCallbackNotifications[11]();} 
      ^
-COTS/MCAL/Gpt/Gpt.c(303): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void WTIMER5A_Handler(void)         {if (gptCallbackNotifications[11] != NULL_PTR)      gptCallbackNotifications[11];} 
+COTS/MCAL/Gpt/Gpt.c(323): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void WTIMER5A_Handler(void)         {if (gptCallbackNotifications[11] != NULL_PTR)      gptCallbackNotifications[11]();} 
 ^
 static 
-COTS/MCAL/Gpt/Gpt.c(303): warning: expression result unused [-Wunused-value]
-void WTIMER5A_Handler(void)         {if (gptCallbackNotifications[11] != NULL_PTR)      gptCallbackNotifications[11];} 
-                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~ ~~^
-36 warnings generated.
+24 warnings generated.
 compiling Gpt.c...
-COTS/APPLICATION/main.c(16): warning: In file included from...
-./COTS/MCAL/Include\Gpt.h(19): warning: In file included from...
-./COTS/MCAL/Include/Gpt_Types.h(46): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-        GPT_TMR11   ,      /*32/64-bit Wide Timer 5 base: 0x4004.F000           */   
-                    ^~
-./COTS/MCAL/Include/Gpt_Types.h(53): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    GPT_PREDEF_TIMER_1000MS_32BIT = 16000000,
-                                            ^
-./COTS/MCAL/Include/Gpt_Types.h(59): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    GPT_CH_MODE_ONESHOT_COUNTUP,
-                               ^
-./COTS/MCAL/Include/Gpt_Types.h(72): warning: padding struct 'Gpt_ConfigType' with 2 bytes to align 'gptPredefinedValue' [-Wpadded]
-    Gpt_PredefTimerType gptPredefinedValue;
-                        ^
-COTS/APPLICATION/main.c(17): warning: In file included from...
-./COTS/MCAL/Include\Port.h(18): warning: In file included from...
-./COTS/MCAL/Include/Port_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    CH8,
-       ^
-./COTS/MCAL/Include/Port_Types.h(66): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    PIN_GPIO =0,  /*By Default GPIO*/
-               ^~
-COTS/APPLICATION/main.c(18): warning: In file included from...
-./COTS/MCAL/Include\Dio.h(19): warning: In file included from...
-./COTS/MCAL/Include/Dio_Types.h(51): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    DIO_CH8,
-           ^
-./COTS/MCAL/Include/Dio_Types.h(57): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    DIO_PIN_SNA =0xFF,
-                     ^
-COTS/APPLICATION/main.c(19): warning: In file included from...
-./COTS/APPLICATION/APPL_MAIN.h(8): warning: '/*' within block comment [-Wcomment]
- *  Description:  /* Board Support Package for the EK-TM4C123GXL board */    
-                  ^
-COTS/APPLICATION/main.c(29): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    RUNNING_MODE,
-                ^
-COTS/APPLICATION/main.c(34): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    DIMMING_TIME,
-                ^
-COTS/APPLICATION/main.c(97): warning: implicit declaration of function 'IntCrtl_Init' [-Wimplicit-function-declaration]
-    IntCrtl_Init();
-    ^
-COTS/APPLICATION/main.c(106): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
-                sw1State = Dio_ReadChannel(PIN_SW1, PORT_SW1);
-                           ~~~~~~~~~~~~~~~          ^~~~~~~~
-./COTS/HAL\Port_Cfg.h(31): note: expanded from macro 'PORT_SW1'
-#define PORT_SW1                PORTF
-                                ^~~~~
-COTS/APPLICATION/main.c(106): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
-                sw1State = Dio_ReadChannel(PIN_SW1, PORT_SW1);
-                           ~~~~~~~~~~~~~~~ ^~~~~~~
-./COTS/HAL\Port_Cfg.h(32): note: expanded from macro 'PIN_SW1'
-#define PIN_SW1                 CH4
-                                ^~~
-COTS/APPLICATION/main.c(107): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
-                sw2State = Dio_ReadChannel(PIN_SW2, PORT_SW2);
-                           ~~~~~~~~~~~~~~~          ^~~~~~~~
-./COTS/HAL\Port_Cfg.h(34): note: expanded from macro 'PORT_SW2'
-#define PORT_SW2                PORTF
-                                ^~~~~
-COTS/APPLICATION/main.c(107): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
-                sw2State = Dio_ReadChannel(PIN_SW2, PORT_SW2);
-                           ~~~~~~~~~~~~~~~ ^~~~~~~
-./COTS/HAL\Port_Cfg.h(35): note: expanded from macro 'PIN_SW2'
-#define PIN_SW2                 CH0                
-                                ^~~
-COTS/APPLICATION/main.c(179): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
-                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
-                ~~~~~~~~~~~~~~~~           ^~~~~~~~~
-./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
-#define PORT_LED1               PORTF
-                                ^~~~~
-COTS/APPLICATION/main.c(179): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
-                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
-                ~~~~~~~~~~~~~~~~ ^~~~~~~~
-./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
-#define PIN_LED1                CH1
-                                ^~~
-COTS/APPLICATION/main.c(194): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
-                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
-                ~~~~~~~~~~~~~~~~           ^~~~~~~~~
-./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
-#define PORT_LED1               PORTF
-                                ^~~~~
-COTS/APPLICATION/main.c(194): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
-                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
-                ~~~~~~~~~~~~~~~~ ^~~~~~~~
-./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
-#define PIN_LED1                CH1
-                                ^~~
-COTS/APPLICATION/main.c(219): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
-    Dio_FlipChannel(PIN_LED1, PORT_LED1);    
-    ~~~~~~~~~~~~~~~           ^~~~~~~~~
-./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
-#define PORT_LED1               PORTF
-                                ^~~~~
-COTS/APPLICATION/main.c(219): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
-    Dio_FlipChannel(PIN_LED1, PORT_LED1);    
-    ~~~~~~~~~~~~~~~ ^~~~~~~~
-./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
-#define PIN_LED1                CH1
-                                ^~~
-COTS/APPLICATION/main.c(242): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
-                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
-                ~~~~~~~~~~~~~~~~           ^~~~~~~~~
-./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
-#define PORT_LED1               PORTF
-                                ^~~~~
-COTS/APPLICATION/main.c(242): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
-                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
-                ~~~~~~~~~~~~~~~~ ^~~~~~~~
-./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
-#define PIN_LED1                CH1
-                                ^~~
-COTS/APPLICATION/main.c(253): warning: implicit conversion from enumeration type 'PORT_PortName' to different enumeration type 'Dio_PortType' [-Wenum-conversion]
-                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
-                ~~~~~~~~~~~~~~~~           ^~~~~~~~~
-./COTS/HAL\Port_Cfg.h(37): note: expanded from macro 'PORT_LED1'
-#define PORT_LED1               PORTF
-                                ^~~~~
-COTS/APPLICATION/main.c(253): warning: implicit conversion from enumeration type 'PORT_ChannelName' to different enumeration type 'Dio_ChannelType' [-Wenum-conversion]
-                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
-                ~~~~~~~~~~~~~~~~ ^~~~~~~~
-./COTS/HAL\Port_Cfg.h(38): note: expanded from macro 'PIN_LED1'
-#define PIN_LED1                CH1
-                                ^~~
-26 warnings generated.
-compiling main.c...
 COTS/MCAL/Config/Gpt_Lcfg.c(16): warning: In file included from...
 ./COTS/MCAL/Include\Gpt_Types.h(46): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
         GPT_TMR11   ,      /*32/64-bit Wide Timer 5 base: 0x4004.F000           */   
                     ^~
-./COTS/MCAL/Include\Gpt_Types.h(53): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
-    GPT_PREDEF_TIMER_1000MS_32BIT = 16000000,
-                                            ^
-./COTS/MCAL/Include\Gpt_Types.h(59): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
+./COTS/MCAL/Include\Gpt_Types.h(62): warning: commas at the end of enumerator lists are a C99-specific feature [-Wc99-extensions]
     GPT_CH_MODE_ONESHOT_COUNTUP,
                                ^
-./COTS/MCAL/Include/Gpt_Types.h(72): warning: padding struct 'Gpt_ConfigType' with 2 bytes to align 'gptPredefinedValue' [-Wpadded]
+./COTS/MCAL/Include/Gpt_Types.h(75): warning: padding struct 'Gpt_ConfigType' with 2 bytes to align 'gptPredefinedValue' [-Wpadded]
     Gpt_PredefTimerType gptPredefinedValue;
                         ^
 COTS/MCAL/Config/Gpt_Lcfg.c(18): warning: In file included from...
 ./COTS/APPLICATION\APPL_MAIN.h(8): warning: '/*' within block comment [-Wcomment]
  *  Description:  /* Board Support Package for the EK-TM4C123GXL board */    
                   ^
-5 warnings generated.
+4 warnings generated.
 compiling Gpt_Lcfg.c...
 RTE/Device/TM4C123GH6PM/system_TM4C123.c(13): warning: In file included from...
 C:/Users/ext_Maib1/AppData/Local/Arm/Packs/Keil/TM4C_DFP/1.1.0/Device/Include/TM4C123\TM4C123.h(98): warning: In file included from...
@@ -538,7 +550,7 @@ RTE/Device/TM4C123GH6PM/system_TM4C123.c(19): warning: // comments are not allow
 compiling system_TM4C123.c...
 assembling startup_TM4C123.s...
 linking...
-Program Size: Code=4548 RO-data=744 RW-data=4 ZI-data=624  
+Program Size: Code=5244 RO-data=748 RW-data=4 ZI-data=624  
 ".\Objects\Project1_Blinking_LED_control.axf" - 0 Error(s), 124 Warning(s).
 
 <h2>Software Packages used:</h2>
@@ -565,10 +577,10 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: Keil::Device:Startup:1.0.1
-      Include file:  Device/Include/TM4C123/TM4C123.h
-      Source file:   Device/Source/system_TM4C123.c
       Source file:   Device/Source/ARM/startup_TM4C123.s
-Build Time Elapsed:  00:00:12
+      Source file:   Device/Source/system_TM4C123.c
+      Include file:  Device/Include/TM4C123/TM4C123.h
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>

@@ -55,7 +55,7 @@ const Gpt_ConfigType GptConfigPtr[GPT_MAX_CH_NO] =
     {
         GPT_TMR7,
         GPT_CH_MODE_CONTINUOUS_COUNTUP,
-        GPT_PREDEF_TIMER_100MS_32BIT,
+        GPT_PREDEF_TIMER_500MS_32BIT,
     },
     {
         GPT_TMR8,
