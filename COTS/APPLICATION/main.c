@@ -144,6 +144,7 @@ void Appl_SecStartUpConfig(void)
     }else
     {   
         stateMachine =RUNNING_MODE;
+        Gpt_StartTimer(GPT_TMR8,GPT_PREDEF_TIMER_1000MS_32BIT);
         Gpt_StopTimer(GPT_TMR6);
     }
 
@@ -179,8 +180,9 @@ void Appl_SecTimerHanlder(void)
             }else
             {
                 RunningSubStates = DIMMING_TIME;
+                ((offTimeInputCounterSec ==0)? (offtimeCalc = PRECONFIGURED_LIGHT_OFF_TIMING_SEC):(offtimeCalc = offTimeInputCounterSec));
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
-                Gpt_StopTimer(GPT_TMR8);
+              //  Gpt_StopTimer(GPT_TMR8);
                 onTimerControl =0;
             }
             
@@ -194,12 +196,17 @@ void Appl_SecTimerHanlder(void)
             }else
             {
                 RunningSubStates = ON_TIME;
+                ((onTimeInputCounterSec ==0)? (ontimeCalc = PRECONFIGURED_LIGHT_ON_TIMING_SEC):(ontimeCalc = onTimeInputCounterSec));
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
-                Gpt_StopTimer(GPT_TMR8);
+            //    Gpt_StopTimer(GPT_TMR8);
                 Gpt_StopTimer(GPT_TMR7);
                 offTimerControl =0;
             }
 
+        break;
+        
+        default:
+            /*Do nothing*/
         break;
     }
 }
@@ -244,7 +251,7 @@ static void    RunningStateHanlder(void)
             if (onTimerControl ==0)
             {
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
-                Gpt_StartTimer(GPT_TMR8,GPT_PREDEF_TIMER_1000MS_32BIT);
+              //  Gpt_StartTimer(GPT_TMR8,GPT_PREDEF_TIMER_1000MS_32BIT);
                 
                 ((onTimeInputCounterSec ==0)? (ontimeCalc = PRECONFIGURED_LIGHT_ON_TIMING_SEC):(ontimeCalc = onTimeInputCounterSec));
                 
@@ -258,13 +265,13 @@ static void    RunningStateHanlder(void)
             if (offTimerControl ==0)
             {
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
-                Gpt_StartTimer(GPT_TMR8,GPT_PREDEF_TIMER_1000MS_32BIT);
+           //     Gpt_StartTimer(GPT_TMR8,GPT_PREDEF_TIMER_1000MS_32BIT);
                 
                 ((offTimeInputCounterSec ==0)? (offtimeCalc = PRECONFIGURED_LIGHT_OFF_TIMING_SEC):(offtimeCalc = offTimeInputCounterSec));
             //    offtimeCalc = offTimeInputCounterSec;
                 offTimerControl =0xFF;
 
-                Gpt_StartTimer(GPT_TMR7,GPT_PREDEF_TIMER_100MS_32BIT);
+                Gpt_StartTimer(GPT_TMR7,GPT_PREDEF_TIMER_500MS_32BIT);
                 dimmingTimerControl =0xFF;
             }
 

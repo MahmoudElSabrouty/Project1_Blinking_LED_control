@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\Project1_Blinking_LED_control.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Project1_Blinking_LED_control.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Sat Oct 15 10:06:43 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Sat Oct 15 10:56:42 2022
 <BR><P>
 <H3>Maximum Stack Usage =         88 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1179,20 +1179,21 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> gpt_lcfg.o(.rodata.gptCallbackNotifications)
 </UL>
-<P><STRONG><a name="[78]"></a>Appl_SecStartUpConfig</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, main.o(.text.Appl_SecStartUpConfig))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Appl_SecStartUpConfig &rArr; Gpt_StopTimer
+<P><STRONG><a name="[78]"></a>Appl_SecStartUpConfig</STRONG> (Thumb, 78 bytes, Stack size 8 bytes, main.o(.text.Appl_SecStartUpConfig))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = Appl_SecStartUpConfig &rArr; Gpt_StartTimer
 </UL>
-<BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_StopTimer
+<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_StopTimer
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_ISRClear
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_StartTimer
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> gpt_lcfg.o(.rodata.gptCallbackNotifications)
 </UL>
-<P><STRONG><a name="[7a]"></a>Appl_SecTimerHanlder</STRONG> (Thumb, 202 bytes, Stack size 24 bytes, main.o(.text.Appl_SecTimerHanlder))
+<P><STRONG><a name="[7a]"></a>Appl_SecTimerHanlder</STRONG> (Thumb, 304 bytes, Stack size 24 bytes, main.o(.text.Appl_SecTimerHanlder))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = Appl_SecTimerHanlder &rArr; Dio_WriteChannel
 </UL>
-<BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_StopTimer
+<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_StopTimer
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_ISRClear
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dio_WriteChannel
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dio_WriteChannel
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> gpt_lcfg.o(.rodata.gptCallbackNotifications)
 </UL>
@@ -1202,10 +1203,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Appl_DimmingHanlder
 </UL>
 
-<P><STRONG><a name="[9a]"></a>Dio_ISR_Clear</STRONG> (Thumb, 82 bytes, Stack size 12 bytes, dio.o(.text.Dio_ISR_Clear))
+<P><STRONG><a name="[95]"></a>Dio_ISR_Clear</STRONG> (Thumb, 82 bytes, Stack size 12 bytes, dio.o(.text.Dio_ISR_Clear))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = Dio_ISR_Clear
 </UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HandleUserInput
+<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GpioIsrHandler
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HandleUserInput
 </UL>
 
 <P><STRONG><a name="[a5]"></a>Dio_ReadChannel</STRONG> (Thumb, 102 bytes, Stack size 16 bytes, dio.o(.text.Dio_ReadChannel))
@@ -1214,7 +1216,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[92]"></a>Dio_WriteChannel</STRONG> (Thumb, 186 bytes, Stack size 20 bytes, dio.o(.text.Dio_WriteChannel))
+<P><STRONG><a name="[93]"></a>Dio_WriteChannel</STRONG> (Thumb, 186 bytes, Stack size 20 bytes, dio.o(.text.Dio_WriteChannel))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = Dio_WriteChannel
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Appl_SecTimerHanlder
@@ -1222,14 +1224,18 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[28]"></a>GPIOF_Handler</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, dio.o(.text.GPIOF_Handler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = GPIOF_Handler
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = GPIOF_Handler &rArr; GpioIsrHandler &rArr; Dio_ISR_Clear
 </UL>
-<BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GpioIsrHandler
+<BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GpioIsrHandler
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_tm4c123.o(RESET)
 </UL>
-<P><STRONG><a name="[93]"></a>GpioIsrHandler</STRONG> (Thumb, 118 bytes, Stack size 0 bytes, main.o(.text.GpioIsrHandler))
-<BR><BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOF_Handler
+<P><STRONG><a name="[94]"></a>GpioIsrHandler</STRONG> (Thumb, 104 bytes, Stack size 8 bytes, main.o(.text.GpioIsrHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = GpioIsrHandler &rArr; Dio_ISR_Clear
+</UL>
+<BR>[Calls]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dio_ISR_Clear
+</UL>
+<BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOF_Handler
 </UL>
 
 <P><STRONG><a name="[8f]"></a>Gpt_ISRClear</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, gpt.o(.text.Gpt_ISRClear))
@@ -1240,25 +1246,26 @@ Global Symbols
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Appl_SecStartUpConfig
 </UL>
 
-<P><STRONG><a name="[94]"></a>Gpt_Init</STRONG> (Thumb, 338 bytes, Stack size 32 bytes, gpt.o(.text.Gpt_Init))
+<P><STRONG><a name="[96]"></a>Gpt_Init</STRONG> (Thumb, 338 bytes, Stack size 32 bytes, gpt.o(.text.Gpt_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = Gpt_Init &rArr; Gpt_LoadIntervalVal
 </UL>
-<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_LoadIntervalVal
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_IntCtl
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_SetMode
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enableGptClkGating
+<BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_LoadIntervalVal
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_IntCtl
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_SetMode
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enableGptClkGating
 </UL>
 <BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[9b]"></a>Gpt_StartTimer</STRONG> (Thumb, 70 bytes, Stack size 12 bytes, gpt.o(.text.Gpt_StartTimer))
+<P><STRONG><a name="[91]"></a>Gpt_StartTimer</STRONG> (Thumb, 70 bytes, Stack size 12 bytes, gpt.o(.text.Gpt_StartTimer))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = Gpt_StartTimer
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunningStateHanlder
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HandleUserInput
+<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Appl_SecStartUpConfig
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunningStateHanlder
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HandleUserInput
 </UL>
 
-<P><STRONG><a name="[91]"></a>Gpt_StopTimer</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, gpt.o(.text.Gpt_StopTimer))
+<P><STRONG><a name="[92]"></a>Gpt_StopTimer</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, gpt.o(.text.Gpt_StopTimer))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Gpt_StopTimer
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Appl_SecTimerHanlder
@@ -1354,10 +1361,10 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dio_ReadChannel
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntCrtl_Init
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_Init
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_Init
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Port_Init
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RunningStateHanlder
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HandleUserInput
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HandleUserInput
 </UL>
 <BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
@@ -1373,20 +1380,20 @@ Global Symbols
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[99]"></a>HandleUserInput</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, main.o(.text.HandleUserInput))
+<P><STRONG><a name="[9b]"></a>HandleUserInput</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, main.o(.text.HandleUserInput))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = HandleUserInput &rArr; Gpt_StartTimer
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_StartTimer
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dio_ISR_Clear
+<BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_StartTimer
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dio_ISR_Clear
 </UL>
 <BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[a3]"></a>RunningStateHanlder</STRONG> (Thumb, 278 bytes, Stack size 16 bytes, main.o(.text.RunningStateHanlder))
+<P><STRONG><a name="[a3]"></a>RunningStateHanlder</STRONG> (Thumb, 250 bytes, Stack size 16 bytes, main.o(.text.RunningStateHanlder))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = RunningStateHanlder &rArr; Dio_WriteChannel
 </UL>
-<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dio_WriteChannel
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_StartTimer
+<BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Dio_WriteChannel
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_StartTimer
 </UL>
 <BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1427,28 +1434,28 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Port_Init
 </UL>
 
-<P><STRONG><a name="[95]"></a>enableGptClkGating</STRONG> (Thumb, 162 bytes, Stack size 8 bytes, gpt.o(.text.enableGptClkGating))
+<P><STRONG><a name="[97]"></a>enableGptClkGating</STRONG> (Thumb, 162 bytes, Stack size 8 bytes, gpt.o(.text.enableGptClkGating))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = enableGptClkGating
 </UL>
-<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_Init
+<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_Init
 </UL>
 
-<P><STRONG><a name="[96]"></a>Gpt_SetMode</STRONG> (Thumb, 154 bytes, Stack size 16 bytes, gpt.o(.text.Gpt_SetMode))
+<P><STRONG><a name="[98]"></a>Gpt_SetMode</STRONG> (Thumb, 154 bytes, Stack size 16 bytes, gpt.o(.text.Gpt_SetMode))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Gpt_SetMode
 </UL>
-<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_Init
+<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_Init
 </UL>
 
-<P><STRONG><a name="[97]"></a>Gpt_IntCtl</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, gpt.o(.text.Gpt_IntCtl))
+<P><STRONG><a name="[99]"></a>Gpt_IntCtl</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, gpt.o(.text.Gpt_IntCtl))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Gpt_IntCtl
 </UL>
-<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_Init
+<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_Init
 </UL>
 
-<P><STRONG><a name="[98]"></a>Gpt_LoadIntervalVal</STRONG> (Thumb, 70 bytes, Stack size 16 bytes, gpt.o(.text.Gpt_LoadIntervalVal))
+<P><STRONG><a name="[9a]"></a>Gpt_LoadIntervalVal</STRONG> (Thumb, 70 bytes, Stack size 16 bytes, gpt.o(.text.Gpt_LoadIntervalVal))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Gpt_LoadIntervalVal
 </UL>
-<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_Init
+<BR>[Called By]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gpt_Init
 </UL>
 <P>
 <H3>
