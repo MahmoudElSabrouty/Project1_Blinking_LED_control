@@ -156,7 +156,7 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>181</LineNumber>
+          <LineNumber>179</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>1334</Address>
           <ByteObject>0</ByteObject>
@@ -167,14 +167,14 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>.\COTS\APPLICATION\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Project1_Blinking_LED_control\COTS/APPLICATION/main.c\181</Expression>
+          <Expression>\\Project1_Blinking_LED_control\COTS/APPLICATION/main.c\179</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>198</LineNumber>
+          <LineNumber>195</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>1480</Address>
+          <Address>1462</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -183,14 +183,14 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>.\COTS\APPLICATION\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Project1_Blinking_LED_control\COTS/APPLICATION/main.c\198</Expression>
+          <Expression>\\Project1_Blinking_LED_control\COTS/APPLICATION/main.c\195</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>262</LineNumber>
+          <LineNumber>230</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>3464</Address>
+          <Address>1192</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -199,14 +199,14 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>.\COTS\APPLICATION\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Project1_Blinking_LED_control\COTS/APPLICATION/main.c\262</Expression>
+          <Expression>\\Project1_Blinking_LED_control\COTS/APPLICATION/main.c\230</Expression>
         </Bp>
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
-          <LineNumber>116</LineNumber>
+          <LineNumber>253</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>4850</Address>
+          <Address>3360</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -215,14 +215,14 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>.\COTS\APPLICATION\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Project1_Blinking_LED_control\COTS/APPLICATION/main.c\116</Expression>
+          <Expression>\\Project1_Blinking_LED_control\COTS/APPLICATION/main.c\253</Expression>
         </Bp>
         <Bp>
           <Number>4</Number>
           <Type>0</Type>
-          <LineNumber>194</LineNumber>
+          <LineNumber>267</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>1452</Address>
+          <Address>3454</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -231,98 +231,42 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>.\COTS\APPLICATION\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Project1_Blinking_LED_control\COTS/APPLICATION/main.c\194</Expression>
-        </Bp>
-        <Bp>
-          <Number>5</Number>
-          <Type>0</Type>
-          <LineNumber>112</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>RTE/Device/TM4C123GH6PM/startup_TM4C123.s</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\Project1_Blinking_LED_control\COTS/APPLICATION/main.c\267</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>TempRegVar</ItemText>
+          <ItemText>stateMachine</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>TempVar</ItemText>
+          <ItemText>stateMachine</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>tempRegAddr</ItemText>
+          <ItemText>ontimeCalc,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>tempRegVal</ItemText>
+          <ItemText>offtimeCalc</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>stateMachine</ItemText>
+          <ItemText>onTimerControl</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>stateMachine</ItemText>
-        </Ww>
-        <Ww>
-          <count>6</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>onTimeInputCounterSec</ItemText>
-        </Ww>
-        <Ww>
-          <count>7</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>offTimeInputCounterSec</ItemText>
-        </Ww>
-        <Ww>
-          <count>8</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>onTimeInputCounterSec</ItemText>
-        </Ww>
-        <Ww>
-          <count>9</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>offTimeInputCounterSec</ItemText>
-        </Ww>
-        <Ww>
-          <count>10</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>ontimeCalc,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>11</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>offtimeCalc</ItemText>
-        </Ww>
-        <Ww>
-          <count>12</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>onTimerControl</ItemText>
-        </Ww>
-        <Ww>
-          <count>13</count>
-          <WinNumber>1</WinNumber>
           <ItemText>offTimerControl</ItemText>
         </Ww>
         <Ww>
-          <count>14</count>
+          <count>6</count>
           <WinNumber>1</WinNumber>
           <ItemText>RunningSubStates</ItemText>
         </Ww>
@@ -341,7 +285,7 @@
       <DebugFlag>
         <trace>0</trace>
         <periodic>1</periodic>
-        <aLwin>1</aLwin>
+        <aLwin>0</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>

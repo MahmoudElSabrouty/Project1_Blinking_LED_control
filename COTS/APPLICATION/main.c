@@ -182,7 +182,7 @@ void Appl_SecTimerHanlder(void)
                 RunningSubStates = DIMMING_TIME;
                 ((offTimeInputCounterSec ==0)? (offtimeCalc = PRECONFIGURED_LIGHT_OFF_TIMING_SEC):(offtimeCalc = offTimeInputCounterSec));
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
-              //  Gpt_StopTimer(GPT_TMR8);
+              
                 onTimerControl =0;
             }
             
@@ -192,13 +192,13 @@ void Appl_SecTimerHanlder(void)
 
             if (offtimeCalc>0)
             {
-                offtimeCalc--;
+									offtimeCalc--;
             }else
             {
                 RunningSubStates = ON_TIME;
                 ((onTimeInputCounterSec ==0)? (ontimeCalc = PRECONFIGURED_LIGHT_ON_TIMING_SEC):(ontimeCalc = onTimeInputCounterSec));
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
-            //    Gpt_StopTimer(GPT_TMR8);
+            
                 Gpt_StopTimer(GPT_TMR7);
                 offTimerControl =0;
             }
@@ -251,11 +251,11 @@ static void    RunningStateHanlder(void)
             if (onTimerControl ==0)
             {
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
-              //  Gpt_StartTimer(GPT_TMR8,GPT_PREDEF_TIMER_1000MS_32BIT);
+              
                 
                 ((onTimeInputCounterSec ==0)? (ontimeCalc = PRECONFIGURED_LIGHT_ON_TIMING_SEC):(ontimeCalc = onTimeInputCounterSec));
                 
-                //ontimeCalc = onTimeInputCounterSec;
+                
                 onTimerControl =0xFF;
             }
 
@@ -265,10 +265,10 @@ static void    RunningStateHanlder(void)
             if (offTimerControl ==0)
             {
                 Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_HIGH);
-           //     Gpt_StartTimer(GPT_TMR8,GPT_PREDEF_TIMER_1000MS_32BIT);
+           
                 
                 ((offTimeInputCounterSec ==0)? (offtimeCalc = PRECONFIGURED_LIGHT_OFF_TIMING_SEC):(offtimeCalc = offTimeInputCounterSec));
-            //    offtimeCalc = offTimeInputCounterSec;
+           
                 offTimerControl =0xFF;
 
                 Gpt_StartTimer(GPT_TMR7,GPT_PREDEF_TIMER_500MS_32BIT);
@@ -302,7 +302,7 @@ static void HandleUserInput( Dio_LevelType sw1Status,  Dio_LevelType sw2Status)
            startTimerOnce =0xFF;
     }
 
-		//GpioIsrHandler();
+		
 
 }
 
@@ -310,7 +310,7 @@ static void HandleUserInput( Dio_LevelType sw1Status,  Dio_LevelType sw2Status)
 void GpioIsrHandler(void)
 {
 
- //Dio_ISR_Clear(PIN_LED1, PORT_LED1);
+ 
 
     if(stateMachine ==CONFIG_MODE)
     {
@@ -318,13 +318,13 @@ void GpioIsrHandler(void)
         {  
             onTimeInputCounterSec++;
             Dio_ISR_Clear(PIN_SW1, PORT_SW1);
-		    //PORTX_ِAPB_GPIOICR(PORT_SW1) |= (uint32)(1<<PIN_SW1);
+	
         }
         else if(PORTF_ِAPB_GPIOMIS & (1<<PIN_SW2)) /* check if interrupt causes by PF0/SW2 */
         { 
             offTimeInputCounterSec++;
             Dio_ISR_Clear(PIN_SW2, PORT_SW2);
-            //PORTX_ِAPB_GPIOICR(PORT_SW2) |= (1<<PIN_SW2); 
+  
         }
     }
 
