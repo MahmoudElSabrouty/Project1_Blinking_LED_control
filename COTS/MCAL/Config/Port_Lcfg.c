@@ -34,20 +34,20 @@ const Port_ConfigType PortConfigPtr[PORT_MAX_PIN_NO] =
     {
         PORT_SW1,       /* PortName of type PORT_PortName                   */
         PIN_SW1,        /* ChannelName of Type PORT_ChannelName             */
-        PIN_LOW,        /* PortPinLevelValue of Type Port_PinType           */
+        PIN_SNA,        /* PortPinLevelValue of Type Port_PinType           */
         PIN_IN,         /* pinDir of Type Port_PinDirectionType             */
         PIN_GPIO,       /* PortPinMode of Type Port_PinModeType             */
-        PULL_DOWN,      /* pinIntAttach of Type Port_PinInternalAttachType  */
+        PULL_UP,      /* pinIntAttach of Type Port_PinInternalAttachType  */
         ENABLED,        /* pinInterruptEnable of type Port_PinInterruptEnable*/    
        
     },
     {
         PORT_SW2,       /* PortName of type PORT_PortName                   */
         PIN_SW2,        /* ChannelName of Type PORT_ChannelName             */
-        PIN_LOW,        /* PortPinLevelValue of Type Port_PinType           */
+        PIN_SNA,        /* PortPinLevelValue of Type Port_PinType           */
         PIN_IN,         /* pinDir of Type Port_PinDirectionType             */
         PIN_GPIO,       /* PortPinMode of Type Port_PinModeType             */
-        PULL_DOWN,      /* pinIntAttach of Type Port_PinInternalAttachType  */
+        PULL_UP,      /* pinIntAttach of Type Port_PinInternalAttachType  */
         ENABLED,        /* pinInterruptEnable of type Port_PinInterruptEnable*/            
     },
 		{

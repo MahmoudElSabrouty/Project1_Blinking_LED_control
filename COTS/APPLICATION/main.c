@@ -20,10 +20,10 @@
 /**********************************************************************************************************************
 *  LOCAL MACROS CONSTANT\FUNCTION
 *********************************************************************************************************************/	
-#define MAX_ALLOWED_STARTUP_TIME_CONFIG     30
+#define MAX_ALLOWED_STARTUP_TIME_CONFIG     5
 #define USE_PRECONFIGURED_LIGHT_TIMING		
-#define PRECONFIGURED_LIGHT_ON_TIMING_SEC		30
-#define PRECONFIGURED_LIGHT_OFF_TIMING_SEC	20
+#define PRECONFIGURED_LIGHT_ON_TIMING_SEC		15
+#define PRECONFIGURED_LIGHT_OFF_TIMING_SEC	10
 /**********************************************************************************************************************
  *  LOCAL DATA 
  *********************************************************************************************************************/
@@ -95,6 +95,7 @@ main(void)
     static Dio_LevelType sw1State = DIO_PIN_SNA;
     static Dio_LevelType sw2State = DIO_PIN_SNA;
     
+		
     Port_Init(PortConfigPtr);
     Gpt_Init(GptConfigPtr);
     IntCrtl_Init();
@@ -181,7 +182,7 @@ void Appl_SecTimerHanlder(void)
             {
                 RunningSubStates = DIMMING_TIME;
                 ((offTimeInputCounterSec ==0)? (offtimeCalc = PRECONFIGURED_LIGHT_OFF_TIMING_SEC):(offtimeCalc = offTimeInputCounterSec));
-                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
+               
               
                 onTimerControl =0;
             }
@@ -197,7 +198,7 @@ void Appl_SecTimerHanlder(void)
             {
                 RunningSubStates = ON_TIME;
                 ((onTimeInputCounterSec ==0)? (ontimeCalc = PRECONFIGURED_LIGHT_ON_TIMING_SEC):(ontimeCalc = onTimeInputCounterSec));
-                Dio_WriteChannel(PIN_LED1, PORT_LED1, DIO_PIN_LOW);
+               
             
                 Gpt_StopTimer(GPT_TMR7);
                 offTimerControl =0;
@@ -312,8 +313,7 @@ void GpioIsrHandler(void)
 
  
 
-    if(stateMachine ==CONFIG_MODE)
-    {
+
         if (PORTF_ِAPB_GPIOMIS & (1<<PIN_SW1)) /* check if interrupt causes by PF4/SW1*/
         {  
             onTimeInputCounterSec++;
@@ -326,7 +326,7 @@ void GpioIsrHandler(void)
             Dio_ISR_Clear(PIN_SW2, PORT_SW2);
   
         }
-    }
+    
 
 }
 /**********************************************************************************************************************

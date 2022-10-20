@@ -159,10 +159,14 @@ void Dio_FlipChannel(Dio_ChannelType channelId, Dio_PortType portName)
 }
 
 
-
+volatile uint8 ISR_execute =0;
 void GPIOF_Handler(void)
-{
-    GpioIsrHandler();
+{ 
+    if (ISR_execute ==1)
+    {
+        GpioIsrHandler();
+    }
+    ISR_execute = 1;
 }
 
 

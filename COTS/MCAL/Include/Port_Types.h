@@ -54,7 +54,8 @@ typedef enum {
 
 typedef enum {
     PIN_LOW = 0,
-    PIN_HIGH
+    PIN_HIGH,
+    PIN_SNA 
 }Port_PinType;
 
 typedef enum {

@@ -47,7 +47,7 @@ static void enablePortXPinInterrupt(Port_PinInterruptEnable intStatus, PORT_Chan
 {		
 	if (intStatus == ENABLED)
     {			
-          (PORTX_ِAPB_GPIOIM(portName)) |= (1<< chNum);      /*Enable corresponding interrupt*/
+          (PORTX_ِAPB_GPIOIM(portName)) |= (1<< chNum);     /*Enable corresponding interrupt*/
           (PORTX_ِAPB_GPIORIS(portName))|= (1<< chNum);     /*Configure corresponding interrupt Level Sensitive*/
           (PORTX_ِAPB_GPIOIEV(portName))|= (1<< chNum);     /*Configure corresponding interrupt Level High*/
     }
@@ -128,6 +128,10 @@ static void setPortXPinLevelValue(Port_PinType pinType, PORT_ChannelName chNum,P
     }else if (pinType == PIN_HIGH)
     {
         PORTX_ِAPB_GPIODATA_MASK(portName,chNum) = PIN_HIGH;  
+    }
+    else if (pinType == PIN_SNA)
+    {
+      /*Do nothing*/
     }
 
 }
